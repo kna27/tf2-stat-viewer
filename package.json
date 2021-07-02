@@ -1,0 +1,25 @@
+{
+  "name": "tf2-stat-viewer",
+  "version": "1.0.0",
+  "description": "View your TF2 stats in a website with graphs",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kna27/tf2-stat-viewer.git"
+  },
+  "keywords": [
+    "TF2",
+    "Team Fortress 2",
+    "TF2 Stats",
+    "TF2 Map Stats"
+  ],
+  "author": "kna27",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kna27/tf2-stat-viewer/issues"
+  },
+  "homepage": "https://github.com/kna27/tf2-stat-viewer#readme"
+}
