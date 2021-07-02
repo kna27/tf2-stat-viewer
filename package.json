@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/kna27/tf2-stat-viewer/issues"
   },
-  "homepage": "https://github.com/kna27/tf2-stat-viewer#readme"
+  "homepage": "https://github.com/kna27/tf2-stat-viewer#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
