@@ -8,48 +8,51 @@ app.use(express.json());
 app.set('view engine', 'ejs');
 app.get('/', (req, res) => res.render('index'));
 
-function formatStats(jsonStats) {
+function fetchJson(req, res) {
+  var url = `http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v2/?key=${process.env.API_KEY}&appid=440&steamid=${req.params.id}&count=1&format=json`;
+  try {
+    fetch(url, settings)
+      .then(res => res.json())
+      .then((json) => {
+        formattedStats = formatStats(jsonToDict(json));
+        renderStats(res, formattedStats);
+      });
+  } catch (err) {
+    console.log("caught" + err);
+  }
+}
+
+function jsonToDict(jsonStats) {
   var stats = jsonStats.playerstats.stats;
   var achivmentStats = jsonStats.playerstats.achivments;
   var dictStats = {}
   for (let i = 0; i < stats.length; i++) {
     dictStats[stats[i]['name']] = stats[i]['value'];
   }
-
   return dictStats;
 }
 
-function renderStats(res, stats)
-{
+function formatStats(statsDict) {
+  return statsDict;
+}
+
+function renderStats(res, stats) {
   res.render('index', {
-    playerStats: stats    
+    playerStats: stats
   });
 }
 
 app.get('/profile/:id', (req, res) => {
-  //76561198959991541
-  url = `http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/?key=${process.env.API_KEY}&steamids=${req.params.id}`
-  fetch(url ,settings)
-  .then(res => res.json())
-  .then((json) => {
-    if(json.response.players.length != 0){
-      var url = `http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v2/?key=${process.env.API_KEY}&appid=440&steamid=${req.params.id}&count=1&format=json`;
-      try{
-        fetch(url, settings)
-        .then(res => res.json())
-        .then((json) => {
-          formattedStats = formatStats(json);
-          renderStats(res, formattedStats);
-        });
-      } catch (err)
-      {
-        console.log("caught" + err);
+  fetch(`http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/?key=${process.env.API_KEY}&steamids=${req.params.id}`, settings)
+    .then(res => res.json())
+    .then((json) => {
+      if (json.response.players.length != 0) {
+        fetchJson(req, res);
       }
-    }
-    else{
-      res.render('404');
-    }
-  })
+      else {
+        res.render('404');
+      }
+    })
 
 });
 
@@ -57,7 +60,7 @@ app.get("/home", (req, res) => {
   res.render('index');
 });
 
-app.get('*', function(req, res){
+app.get('*', function (req, res) {
   res.status(404).render('404');
 });
 
