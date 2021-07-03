@@ -12,7 +12,6 @@ function formatStats(jsonStats) {
   var stats = jsonStats.playerstats.stats;
   var achivmentStats = jsonStats.playerstats.achivments;
   var dictStats = {}
-  console.log(stats);
   for (let i = 0; i < stats.length; i++) {
     dictStats[stats[i]['name']] = stats[i]['value'];
   }
@@ -27,8 +26,9 @@ function renderStats(res, stats)
   });
 }
 
-app.post('/stats', (req, res) => {
-  var url = `http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v2/?key=${process.env.API_KEY}&appid=440&steamid=${req.body.steamid}&count=1&format=json`;
+app.get('/profile/:id', (req, res) => {
+  //76561198959991541
+  var url = `http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v2/?key=${process.env.API_KEY}&appid=440&steamid=76561198959991541&count=1&format=json`;
   fetch(url, settings)
     .then(res => res.json())
     .then((json) => {

@@ -16,10 +16,10 @@
     <p>
         <%= typeof msg !='undefined' ? msg : '' %>
     </p>
-    <form action="/stats" method="POST">
+    <form>
         <label for="steamid">Steam 64 ID</label>
         <input type="text" id="steamid" name="steamid">
-        <button type="submit" id="submit">Submit</button>
+        <button type="submit" id="submit" onclick="window.location = window.origin + '/profile/' + steamid.value; return false;">Submit</button>
     </form>
     <br>
     <div style="display:<%= typeof playerStats == 'undefined' ? 'none' : 'block' %>">
