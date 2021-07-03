@@ -3,7 +3,7 @@ const fetch = require('node-fetch');
 const app = express();
 const settings = { method: "Get" };
 
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true }))
 app.use(express.json());
 app.set('view engine', 'ejs');
 app.get('/', (req, res) => res.render('index'));
@@ -14,8 +14,8 @@ app.post('/upload', (req, res) => {
   fetch(url, settings)
     .then(res => res.json())
     .then((json) => {
-        console.log(json);
-  });
+      console.log(json);
+    });
 });
 
 app.listen(process.env.PORT || 5000);
