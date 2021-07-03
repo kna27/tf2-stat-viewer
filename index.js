@@ -1,12 +1,7 @@
 const express = require('express');
 const fetch = require('node-fetch');
-const dotenv = require('dotenv');
 const app = express();
 const settings = { method: "Get" };
-const result = dotenv.config();
-if (result.error) {
-  throw result.error;
-}
 
 app.use(express.urlencoded());
 app.use(express.json());
@@ -15,7 +10,7 @@ app.get('/', (req, res) => res.render('index'));
 
 app.post('/upload', (req, res) => {
   // 76561198959991541
-  var url = `http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v2/?key=${result.parsed.API_KEY}&appid=440&steamid=${req.body.steamid}&count=1&format=json`;
+  var url = `http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v2/?key=${process.env.API_KEY}&appid=440&steamid=${req.body.steamid}&count=1&format=json`;
   fetch(url, settings)
     .then(res => res.json())
     .then((json) => {
