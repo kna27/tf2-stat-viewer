@@ -37,5 +37,13 @@ app.get('/profile/:id', (req, res) => {
     });
 });
 
+app.get("/home", (req, res) => {
+  res.render('index');
+});
+
+app.get('*', function(req, res){
+  res.status(404).render('404');
+});
+
 app.listen(process.env.PORT || 5000);
 console.log("Listening at http://127.0.0.1:5000");
