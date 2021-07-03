@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/kna27/tf2-stat-viewer#readme",
   "dependencies": {
+    "dotenv": "^10.0.0",
     "express": "^4.17.1"
   }
 }
