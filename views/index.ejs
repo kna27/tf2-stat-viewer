@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0" />
+    <meta name="description" content="View your personal TF2 stats">
+    <title>TF2 Stats</title>
+</head>
+
+<body>
+    <h1>TF2 Stat Viewer</h1>
+    <h2>View your personal TF2 stats</h2>
+    <p>
+        <%= typeof msg !='undefined' ? msg : '' %>
+    </p>
+    <form action="/upload" method="POST">
+        <label for="steamid">Steam 64 ID</label>
+        <input type="text" id="steamid" name="steamid">
+        <button type="submit" id="submit">Submit</button>
+    </form>
+    <br>
+</body>
+
+</html>

@@ -1,20 +1,27 @@
-
-const express = require('express')
-const app = express()
-dotenv = require('dotenv')
-
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
-
-const result = dotenv.config()
-
+const express = require('express');
+const fetch = require('node-fetch');
+const dotenv = require('dotenv');
+const app = express();
+const settings = { method: "Get" };
+const result = dotenv.config();
 if (result.error) {
-  throw result.error
+  throw result.error;
 }
 
-// JSON Request: http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v2/?key=result.parsed.API_KEY&appid=440&steamid=76561198959991541&count=1&format=json
+app.use(express.urlencoded());
+app.use(express.json());
+app.set('view engine', 'ejs');
+app.get('/', (req, res) => res.render('index'));
 
-console.log(result.parsed.API_KEY)
+app.post('/upload', (req, res) => {
+  // 76561198959991541
+  var url = `http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v2/?key=${result.parsed.API_KEY}&appid=440&steamid=${req.body.steamid}&count=1&format=json`;
+  fetch(url, settings)
+    .then(res => res.json())
+    .then((json) => {
+        console.log(json);
+  });
+});
+
 app.listen(process.env.PORT || 5000);
 console.log("Listening at http://127.0.0.1:5000");
