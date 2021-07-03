@@ -28,7 +28,7 @@ function renderStats(res, stats)
 
 app.get('/profile/:id', (req, res) => {
   //76561198959991541
-  var url = `http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v2/?key=${process.env.API_KEY}&appid=440&steamid=76561198959991541&count=1&format=json`;
+  var url = `http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v2/?key=${process.env.API_KEY}&appid=440&steamid=${req.params.id}&count=1&format=json`;
   fetch(url, settings)
     .then(res => res.json())
     .then((json) => {
