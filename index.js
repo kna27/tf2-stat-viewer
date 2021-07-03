@@ -8,13 +8,31 @@ app.use(express.json());
 app.set('view engine', 'ejs');
 app.get('/', (req, res) => res.render('index'));
 
-app.post('/upload', (req, res) => {
-  // 76561198959991541
-  var url = `http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v2/?key=${process.env.API_KEY}&appid=440&steamid=${req.body.steamid}&count=1&format=json`;
+function formatStats(jsonStats) {
+  var stats = jsonStats.playerstats.stats;
+  var achivmentStats = jsonStats.playerstats.achivments;
+  var dictStats = {}
+  for (let i = 0; i < stats.length; i++) {
+    dictStats[stats[i]['name']] = stats[i]['value'];
+  }
+
+  return dictStats;
+}
+
+function renderStats(res, stats)
+{
+  res.render('index', {
+
+  });
+}
+
+app.post('/stats', (req, res) => {
+  var url = `http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v2/?key=${process.env.API_KEY}&appid=440&steamid=76561198959991541&count=1&format=json`;
   fetch(url, settings)
     .then(res => res.json())
     .then((json) => {
-      console.log(json);
+      formattedStats = formatStats(json);
+      renderStats(res, formattedStats);
     });
 });
 
