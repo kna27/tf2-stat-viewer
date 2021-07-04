@@ -12,6 +12,17 @@ app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
 app.get('/', (req, res) => res.render('index'));
 
+async function safeParseJSON(response, res) {
+  const body = await response.text();
+  try {
+    return JSON.parse(body);
+  } catch (err) {
+    console.error("Error Parsing JSON:", err);
+    console.error("Response body:", body);
+    res.render('404');
+  }
+}
+
 function fetchJson(id, req, resp) {
   var url = `http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v2/?key=${process.env.API_KEY}&appid=440&steamid=${id}&count=1&format=json`;
   try {
@@ -20,7 +31,7 @@ function fetchJson(id, req, resp) {
       console.log("Error fetching JSON: " + err)
       return;
     })
-      .then(res => res.json())
+      .then(res => safeParseJSON(res, resp))
       .then((json) => {
         if (json != null) {
           let allStats = formatStats(jsonToDict(json, resp));
