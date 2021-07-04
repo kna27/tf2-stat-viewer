@@ -3,7 +3,8 @@ const fetch = require('node-fetch');
 const app = express();
 const settings = { method: "Get" };
 
-const mapPrefixes = ["arena_", "cp_", "ctf_", "koth_", "mvm_", "pass_", "pd_", "pl_", "plr_", "rd_", "sd_", "tc_", "tr_"];
+const MAPPREFIXES = ["arena_", "cp_", "ctf_", "koth_", "mvm_", "pass_", "pd_", "pl_", "plr_", "rd_", "sd_", "tc_", "tr_"];
+const CLASSES = ["Scout", "Soldier", "Pyro", "Demoman", "Heavy", "Engineer", "Medic", "Sniper", "Spy"]
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json());
@@ -55,10 +56,10 @@ function formatStats(statsDict) {
   let mapPlaytimeStats = {}
 
   for (var key in statsDict) {
-    if (key.endsWith(".accum.iPlayTime") && !mapPrefixes.some(substring => key.includes(substring))) {
+    if (key.endsWith(".accum.iPlayTime") && !MAPPREFIXES.some(substring => key.includes(substring))) {
       if (!key.endsWith(".mvm.accum.iPlayTime")) {
         playtimeStats[key.replace(".accum.iPlayTime", "")] = statsDict[key];
-      } else if (mapPrefixes.some(substring => key.includes(substring))) {
+      } else if (MAPPREFIXES.some(substring => key.includes(substring))) {
         mapPlaytimeStats[key.replace(".accum.iPlayTime", "")] = statsDict[key];
       }
     }
