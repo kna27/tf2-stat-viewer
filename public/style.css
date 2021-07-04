@@ -3,11 +3,17 @@
     src: url(tf2build.ttf);
 }
 
+html, body {
+    height: 100%;
+}
+
 body {
     text-align: center;
     background-image: url("background.jpg");
     background-color: #cccccc;
     color: white;
+    display: flex;
+    flex-direction: column;
     font-family: TF2;
 }
 
@@ -17,6 +23,11 @@ h1 {
 
 h2 {
     font-size: 1.75em;
+}
+
+.content {
+    flex: 1 0 auto;
+    padding: 20px;
 }
 
 #statsDiv {
@@ -51,11 +62,8 @@ h2 {
 }
 
 footer {
-    clear: both;
-    border-radius: 25px;
-    margin-top: 25px;
-    margin-bottom: -25px;
-    position: relative;
+    flex-shrink: 0;
+    padding: 20;
     background-color: rgba(17, 17, 17, 0.8);
     backdrop-filter: blur(5px);
     padding: 5px;
