@@ -37,6 +37,7 @@ h2 {
     border-radius: 25px;
     background-color: rgba(146, 146, 146, 0.5);
     backdrop-filter: blur(5px);
+    display: block;
 }
 
 #links li {
@@ -67,6 +68,7 @@ footer {
     background-color: rgba(17, 17, 17, 0.8);
     backdrop-filter: blur(5px);
     padding: 5px;
+    border-radius: 25px;
 }
 
 canvas {
