@@ -11,17 +11,17 @@ app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
 app.get('/', (req, res) => res.render('index'));
 
-function fetchJson(req, res) {
-  var url = `http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v2/?key=${process.env.API_KEY}&appid=440&steamid=${req.params.id}&count=1&format=json`;
+function fetchJson(id, req, res) {
+  var url = `http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v2/?key=${process.env.API_KEY}&appid=440&steamid=${id}&count=1&format=json`;
   try {
     fetch(url, settings)
       .then(res => res.json())
       .then((json) => {
         let allStats = formatStats(jsonToDict(json));
         renderStats(res, allStats);
-      });
+      })
   } catch (err) {
-    console.log("caught" + err);
+    console.log("Error fetching JSON: " + err);
   }
 }
 
@@ -37,11 +37,14 @@ function jsonToDict(jsonStats) {
 
 function formatStats(statsDict) {
   let playtimeStats = {}
+  let mapPlaytimeStats = {}
 
   for (var key in statsDict) {
     if (key.endsWith(".accum.iPlayTime") && !mapPrefixes.some(substring => key.includes(substring))) {
       if (!key.endsWith(".mvm.accum.iPlayTime")) {
         playtimeStats[key.replace(".accum.iPlayTime", "")] = statsDict[key];
+      } else if (mapPrefixes.some(substring => key.includes(substring))) {
+        mapPlaytimeStats[key.replace(".accum.iPlayTime", "")] = statsDict[key];
       }
     }
   }
@@ -60,13 +63,21 @@ app.get('/profile/:id', (req, res) => {
     .then(res => res.json())
     .then((json) => {
       if (json.response.players.length != 0) {
-        fetchJson(req, res);
+        fetchJson(req.params.id, req, res);
       }
       else {
-        res.render('404');
+        fetch(`http://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=${process.env.API_KEY}&vanityurl=${req.params.id}`, settings)
+          .then(res => res.json())
+          .then((json) => {
+            if (json.response.success == 1) {
+              fetchJson(json.response.steamid, req, res);
+            }
+            else {
+              res.render('404');
+            }
+          });
       }
-    })
-
+    });
 });
 
 app.get("/home", (req, res) => {
