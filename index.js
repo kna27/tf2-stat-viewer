@@ -68,6 +68,7 @@ function formatStats(statsDict) {
 
   for (var key in statsDict) {
     if (key.endsWith(".accum.iPlayTime") && !MAPPREFIXES.some(substring => key.includes(substring))) {
+      statsDict[key] = (statsDict[key] / 3600).toFixed(2);
       if (!key.endsWith(".mvm.accum.iPlayTime")) {
         playtimeStats[key.replace(".accum.iPlayTime", "")] = statsDict[key];
       } else if (MAPPREFIXES.some(substring => key.includes(substring))) {

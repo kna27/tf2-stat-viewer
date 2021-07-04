@@ -9,6 +9,7 @@
     <title>TF2 Stats</title>
     <link rel="stylesheet" type="text/css" href="/style.css">
     <link rel="icon" type="image/png" href="/icon.png" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.4.1/dist/chart.min.js"></script>
 </head>
 
 <body>
@@ -19,20 +20,54 @@
     </p>
     <form>
         <input type="text" id="steamid" name="steamid" placeholder="Enter your Steam name or Steam64 ID">
-        <button type="submit" id="submit" onclick="window.location = window.origin + '/profile/' + steamid.value; return false;">Submit</button>
+        <button type="submit" id="submit"
+            onclick="window.location = window.origin + '/profile/' + steamid.value; return false;">Submit</button>
     </form>
     <br>
-    <div style="display:<%= typeof playerStats == 'undefined' ? 'none' : 'block' %>">
-        <p>Scout Playtime: <%= typeof playerStats !='undefined' ? playerStats['Scout.accum.iPlayTime'] : '' %></p>
-        <p>Soldier Playtime: <%= typeof playerStats !='undefined' ? playerStats['Soldier.accum.iPlayTime'] : '' %></p>
-        <p>Pyro Playtime: <%= typeof playerStats !='undefined' ? playerStats['Pyro.accum.iPlayTime'] : '' %></p>
-        <p>Demoman Playtime: <%= typeof playerStats !='undefined' ? playerStats['Demoman.accum.iPlayTime'] : '' %></p>
-        <p>Heavy Playtime: <%= typeof playerStats !='undefined' ? playerStats['Heavy.accum.iPlayTime'] : '' %></p>
-        <p>Engineer Playtime: <%= typeof playerStats !='undefined' ? playerStats['Engineer.accum.iPlayTime'] : '' %></p>
-        <p>Medic Playtime: <%= typeof playerStats !='undefined' ? playerStats['Medic.accum.iPlayTime'] : '' %></p>
-        <p>Sniper Playtime: <%= typeof playerStats !='undefined' ? playerStats['Sniper.accum.iPlayTime'] : '' %></p>
-        <p>Spy Playtime: <%= typeof playerStats !='undefined' ? playerStats['Spy.accum.iPlayTime'] : '' %></p>
+    <div style="display:<%= typeof playerStats == 'undefined' ? 'none' : 'block' %>" id="statsDiv">
+        <canvas id="playtimeChart" width="750" height="750"></canvas>
     </div>
 </body>
+<script>
+    let playtimeChartCanvas = document.getElementById("playtimeChart").getContext("2d");
+    let playtimeChart = new Chart(playtimeChartCanvas, {
+        type: "pie",
+        data: {
+            labels: [
+                "Scout", "Soldier", "Pyro", "Demoman", "Heavy", "Engineer", "Medic", "Sniper", "Spy"
+            ],
+            datasets: [{
+                data: [<%= typeof playerStats != 'undefined' ? playerStats['Scout.accum.iPlayTime'] : 0 %>,
+                    <%= typeof playerStats != 'undefined' ? playerStats['Soldier.accum.iPlayTime'] : 0 %>,
+                    <%= typeof playerStats != 'undefined' ? playerStats['Pyro.accum.iPlayTime'] : 0 %>,
+                    <%= typeof playerStats != 'undefined' ? playerStats['Demoman.accum.iPlayTime'] : 0 %>,
+                    <%= typeof playerStats != 'undefined' ? playerStats['Heavy.accum.iPlayTime'] : 0 %>,
+                    <%= typeof playerStats != 'undefined' ? playerStats['Engineer.accum.iPlayTime'] : 0 %>,
+                    <%= typeof playerStats != 'undefined' ? playerStats['Medic.accum.iPlayTime'] : 0 %>,
+                    <%= typeof playerStats != 'undefined' ? playerStats['Sniper.accum.iPlayTime'] : 0 %>,
+                    <%= typeof playerStats != 'undefined' ? playerStats['Spy.accum.iPlayTime'] : 0 %>],
+                backgroundColor: [
+                    'rgb(192,192,192)',
+                    'rgb(0,0,255)',
+                    'rgb(255,0,0)',
+                    'rgb(255, 145, 0)',
+                    'rgb(100, 0, 200)',
+                    'rgb(255, 215, 0)',
+                    'rgb(255, 0, 171)',
+                    'rgb(0, 100, 0)',
+                    'rgb(181, 100, 29)'
+                ],
+            }],
+
+        },
+        options: {
+            responsive: false,
+            title: {
+                display: true,
+                text: "Playtime by Class"
+            }
+        }
+    });
+</script>
 
 </html>
