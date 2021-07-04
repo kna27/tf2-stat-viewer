@@ -3,7 +3,7 @@ const fetch = require('node-fetch');
 const app = express();
 const settings = { method: "Get" };
 
-const mapPrefixes = ["pl_", "ctf_", "cp_", "koth_", "plr_"];
+const mapPrefixes = ["arena_", "cp_", "ctf_", "koth_", "mvm_", "pass_", "pd_", "pl_", "plr_", "rd_", "sd_", "tc_", "tr_"];
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json());
