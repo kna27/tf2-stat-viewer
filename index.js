@@ -75,13 +75,12 @@ function formatStats(statsDict) {
       }
     }
   }
-  return [playtimeStats, statsDict];
+  return statsDict;
 }
 
 function renderStats(res, stats) {
   res.render('index', {
-    playtimeStats: stats[0],
-    playerStats: stats[1]
+    playerStats: stats
   });
 }
 

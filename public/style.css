@@ -1,3 +1,7 @@
 body {
     text-align: center;
 }
+
+input {
+    width: 30%;
+  }
