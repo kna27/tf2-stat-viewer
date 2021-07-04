@@ -16,6 +16,13 @@
         <h1>Page Not Found!</h1>
         <h2>The profile you searched for or the page you have navigated to does not exist.</h2>
         <a href="/home">Return home</a>
+        <br>
+        <br>
+        <form>
+            <input type="text" id="steamid" name="steamid" placeholder="Enter your Steam name or Steam64 ID">
+            <button type="submit" id="submit"
+                onclick="window.location = window.origin + '/profile/' + steamid.value; return false;">Submit</button>
+        </form>
     </div>
     <%- include("footer") %>
 </body>
