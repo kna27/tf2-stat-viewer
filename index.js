@@ -11,28 +11,43 @@ app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
 app.get('/', (req, res) => res.render('index'));
 
-function fetchJson(id, req, res) {
+function fetchJson(id, req, resp) {
   var url = `http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v2/?key=${process.env.API_KEY}&appid=440&steamid=${id}&count=1&format=json`;
   try {
-    fetch(url, settings)
+    fetch(url, settings).catch((err) => {
+      resp.render('404');
+      console.log("Error fetching JSON: " + err)
+      return;
+    })
       .then(res => res.json())
       .then((json) => {
-        let allStats = formatStats(jsonToDict(json));
-        renderStats(res, allStats);
+        if (json != null) {
+          let allStats = formatStats(jsonToDict(json, resp));
+          renderStats(resp, allStats);
+        }
+        else {
+          resp.render('404');
+        }
       })
   } catch (err) {
     console.log("Error fetching JSON: " + err);
   }
 }
 
-function jsonToDict(jsonStats) {
+function jsonToDict(jsonStats, res) {
   var stats = jsonStats.playerstats.stats;
   var achivmentStats = jsonStats.playerstats.achivments;
   let dictStats = {}
-  for (let i = 0; i < stats.length; i++) {
-    dictStats[stats[i]['name']] = stats[i]['value'];
+  if (stats == null) {
+    res.render('404');
+    return;
+  } else {
+    for (let i = 0; i < stats.length; i++) {
+      dictStats[stats[i]['name']] = stats[i]['value'];
+    }
+    return dictStats;
   }
-  return dictStats;
+
 }
 
 function formatStats(statsDict) {
