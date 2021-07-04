@@ -3,8 +3,11 @@ const fetch = require('node-fetch');
 const app = express();
 const settings = { method: "Get" };
 
+const mapPrefixes = ["pl_", "ctf_", "cp_", "koth_", "plr_"];
+
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json());
+app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
 app.get('/', (req, res) => res.render('index'));
 
@@ -14,8 +17,8 @@ function fetchJson(req, res) {
     fetch(url, settings)
       .then(res => res.json())
       .then((json) => {
-        formattedStats = formatStats(jsonToDict(json));
-        renderStats(res, formattedStats);
+        let allStats = formatStats(jsonToDict(json));
+        renderStats(res, allStats);
       });
   } catch (err) {
     console.log("caught" + err);
@@ -25,7 +28,7 @@ function fetchJson(req, res) {
 function jsonToDict(jsonStats) {
   var stats = jsonStats.playerstats.stats;
   var achivmentStats = jsonStats.playerstats.achivments;
-  var dictStats = {}
+  let dictStats = {}
   for (let i = 0; i < stats.length; i++) {
     dictStats[stats[i]['name']] = stats[i]['value'];
   }
@@ -33,12 +36,22 @@ function jsonToDict(jsonStats) {
 }
 
 function formatStats(statsDict) {
-  return statsDict;
+  let playtimeStats = {}
+
+  for (var key in statsDict) {
+    if (key.endsWith(".accum.iPlayTime") && !mapPrefixes.some(substring => key.includes(substring))) {
+      if (!key.endsWith(".mvm.accum.iPlayTime")) {
+        playtimeStats[key.replace(".accum.iPlayTime", "")] = statsDict[key];
+      }
+    }
+  }
+  return [playtimeStats, statsDict];
 }
 
 function renderStats(res, stats) {
   res.render('index', {
-    playerStats: stats
+    playtimeStats: stats[0],
+    playerStats: stats[1]
   });
 }
 
