@@ -1,6 +1,11 @@
 @font-face {
-    font-family: TF2;
+    font-family: "TF2-Heading";
     src: url(tf2build.ttf);
+}
+
+@font-face {
+    font-family: "TF2-Secondary";
+    src: url(tf2secondary.ttf);
 }
 
 html, body {
@@ -14,20 +19,56 @@ body {
     color: white;
     display: flex;
     flex-direction: column;
-    font-family: TF2;
+    font-family: "TF2-Secondary";
 }
 
 h1 {
     font-size: 3.5em;
+    font-family: "TF2-Heading";
 }
 
 h2 {
     font-size: 1.75em;
 }
 
+p {
+    font-size: 1.25em;
+}
+
+footer {
+    flex-shrink: 0;
+    padding: 20;
+    background-color: rgba(17, 17, 17, 0.8);
+    backdrop-filter: blur(5px);
+    padding: 5px;
+    border-radius: 25px;
+}
+
+footer a {
+    color: white;
+}
+
+canvas {
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 800px;
+}
+
+input {
+    width: 30%;
+}
+
 .content {
     flex: 1 0 auto;
     padding: 20px;
+}
+
+.content a {
+    color: white;
+    font-size: 1.5em;
 }
 
 #statsDiv {
@@ -44,16 +85,6 @@ h2 {
     display: inline;
 }
 
-
-#links a {
-    color: white;
-}
-
-.content a {
-    color: white;
-    font-size: 1.5em;
-}
-
 #links ul {
     list-style-type: none;
     margin: 0;
@@ -66,26 +97,4 @@ h2 {
         -webkit-backdrop-filter: blur(5px);
         backdrop-filter: blur(5px);
     }
-}
-
-footer {
-    flex-shrink: 0;
-    padding: 20;
-    background-color: rgba(17, 17, 17, 0.8);
-    backdrop-filter: blur(5px);
-    padding: 5px;
-    border-radius: 25px;
-}
-
-canvas {
-    padding-left: 0;
-    padding-right: 0;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-    width: 800px;
-}
-
-input {
-    width: 30%;
 }
