@@ -69,7 +69,7 @@ if (!playerStats == 0) {
     });
 }
 
-// Accum. playtime stats
+// Collective stats
 document.getElementById("numericalStat_Kills").innerHTML = playerStats['Scout.accum.iNumberOfKills'] + playerStats['Soldier.accum.iNumberOfKills'] + playerStats['Pyro.accum.iNumberOfKills'] + playerStats['Demoman.accum.iNumberOfKills'] + playerStats['Heavy.accum.iNumberOfKills'] + playerStats['Engineer.accum.iNumberOfKills'] + playerStats['Medic.accum.iNumberOfKills'] + playerStats['Sniper.accum.iNumberOfKills'] + playerStats['Spy.accum.iNumberOfKills'];
 document.getElementById("numericalStat_KillAssists").innerHTML = playerStats['Scout.accum.iKillAssists'] + playerStats['Soldier.accum.iKillAssists'] + playerStats['Pyro.accum.iKillAssists'] + playerStats['Demoman.accum.iKillAssists'] + playerStats['Heavy.accum.iKillAssists'] + playerStats['Engineer.accum.iKillAssists'] + playerStats['Medic.accum.iKillAssists'] + playerStats['Sniper.accum.iKillAssists'] + playerStats['Spy.accum.iKillAssists'];
 document.getElementById("numericalStat_DamageDealt").innerHTML = playerStats['Scout.accum.iDamageDealt'] + playerStats['Soldier.accum.iDamageDealt'] + playerStats['Pyro.accum.iDamageDealt'] + playerStats['Demoman.accum.iDamageDealt'] + playerStats['Heavy.accum.iDamageDealt'] + playerStats['Engineer.accum.iDamageDealt'] + playerStats['Medic.accum.iDamageDealt'] + playerStats['Sniper.accum.iDamageDealt'] + playerStats['Spy.accum.iDamageDealt'];

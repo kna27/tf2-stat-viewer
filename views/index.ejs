@@ -26,8 +26,10 @@
         </form>
         <br>
         <div style="display:<%= typeof playerStats == 'undefined' ? 'none' : 'block' %>" id="statsDiv">
-            <h2>Overview</h2>
+            <h1>Overview</h1>
+            <h2>Class Playtime</h2>
             <canvas id="playtimeChart" width="600" height="600"></canvas>
+            <h2>Collective Statis</h2>
             <div id="numericalStats">
                 <div class="numericalStat">
                     <h1 id="numericalStat_Kills"></h1>
@@ -54,9 +56,9 @@
                     <h2>Points Scored</h2>
                 </div>
             </div>
-            <h2>Class Stats</h2>
-            <h2>Map Stats</h2>
-            <h2>MvM Stats</h2>
+            <h1>Class Stats</h1>
+            <h1>Map Stats</h1>
+            <h1>MvM Stats</h1>
         </div>
     </div>
     <%- include("footer") %>
