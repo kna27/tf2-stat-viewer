@@ -32,45 +32,8 @@
     <%- include("footer") %>
 </body>
 <script>
-    let playtimeChartCanvas = document.getElementById("playtimeChart").getContext("2d");
-    let playtimeChart = new Chart(playtimeChartCanvas, {
-        type: "pie",
-        data: {
-            labels: [
-                "Scout", "Soldier", "Pyro", "Demoman", "Heavy", "Engineer", "Medic", "Sniper", "Spy"
-            ],
-            datasets: [{
-                data: [<%= typeof playerStats != 'undefined' ? playerStats['Scout.accum.iPlayTime'] : 0 %>,
-                    <%= typeof playerStats != 'undefined' ? playerStats['Soldier.accum.iPlayTime'] : 0 %>,
-                    <%= typeof playerStats != 'undefined' ? playerStats['Pyro.accum.iPlayTime'] : 0 %>,
-                    <%= typeof playerStats != 'undefined' ? playerStats['Demoman.accum.iPlayTime'] : 0 %>,
-                    <%= typeof playerStats != 'undefined' ? playerStats['Heavy.accum.iPlayTime'] : 0 %>,
-                    <%= typeof playerStats != 'undefined' ? playerStats['Engineer.accum.iPlayTime'] : 0 %>,
-                    <%= typeof playerStats != 'undefined' ? playerStats['Medic.accum.iPlayTime'] : 0 %>,
-                    <%= typeof playerStats != 'undefined' ? playerStats['Sniper.accum.iPlayTime'] : 0 %>,
-                    <%= typeof playerStats != 'undefined' ? playerStats['Spy.accum.iPlayTime'] : 0 %>],
-                backgroundColor: [
-                    'rgb(192,192,192)',
-                    'rgb(0,0,255)',
-                    'rgb(255,0,0)',
-                    'rgb(255, 145, 0)',
-                    'rgb(100, 0, 200)',
-                    'rgb(255, 215, 0)',
-                    'rgb(255, 0, 171)',
-                    'rgb(0, 100, 0)',
-                    'rgb(181, 100, 29)'
-                ],
-            }],
-
-        },
-        options: {
-            responsive: false,
-            title: {
-                display: true,
-                text: "Playtime by Class"
-            }
-        }
-    });
+    window.playerStats = <%- JSON.stringify(playerStats) %>;
 </script>
+<script src="/script.js"></script>
 
 </html>
