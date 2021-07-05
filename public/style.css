@@ -61,6 +61,7 @@ canvas {
     margin-right: auto;
     display: block;
     width: 800px;
+    background-color: rgba(17, 17, 17, 0.8);
 }
 
 input {

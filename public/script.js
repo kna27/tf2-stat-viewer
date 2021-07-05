@@ -37,6 +37,11 @@ if (!playerStats == 0) {
             title: {
                 display: true,
                 text: "Playtime by Class"
+            },
+            plugins: {
+                legend: {
+                    display: false
+                }
             }
         }
     });
