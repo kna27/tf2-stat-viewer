@@ -14,7 +14,7 @@
 
 <body>
     <div class="content">
-        <h1>TF2 Stat Viewer</h1>
+        <h1><a href="/home">TF2 Stat Viewer</a></h1>
         <h2>View your personal TF2 stats</h2>
         <p>
             <%= typeof msg !='undefined' ? msg : '' %>
@@ -32,7 +32,7 @@
     <%- include("footer") %>
 </body>
 <script>
-    window.playerStats = <%- JSON.stringify(playerStats) %>;
+    window.playerStats = <%- typeof playerStats != 'undefined' ? JSON.stringify(playerStats) : 0 %>;
 </script>
 <script src="/script.js"></script>
 

@@ -15,6 +15,7 @@ html, body {
 body {
     text-align: center;
     background-image: url("background.jpg");
+    background-size: 100%;
     background-color: #cccccc;
     color: white;
     display: flex;
@@ -22,9 +23,14 @@ body {
     font-family: "TF2-Secondary";
 }
 
-h1 {
+h1, h1 a {
     font-size: 3.5em;
     font-family: "TF2-Heading";
+    text-decoration: none;
+}
+
+h1 a:hover {
+    text-decoration: underline;
 }
 
 h2 {
