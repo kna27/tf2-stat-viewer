@@ -2,7 +2,7 @@ playerStats = window.playerStats;
 if (!playerStats == 0) {
     let playtimeChartCanvas = document.getElementById("playtimeChart").getContext("2d");
     let playtimeChart = new Chart(playtimeChartCanvas, {
-        type: "pie",
+        type: "bar",
         data: {
             labels: [
                 "Scout", "Soldier", "Pyro", "Demoman", "Heavy", "Engineer", "Medic", "Sniper", "Spy"
