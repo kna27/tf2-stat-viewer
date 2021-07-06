@@ -28,15 +28,15 @@ window.onload = function () {
                         playerStats['Sniper.accum.iPlayTime'],
                         playerStats['Spy.accum.iPlayTime']],
                     backgroundColor: [
-                        'rgb(192,192,192)',
-                        'rgb(0,0,255)',
-                        'rgb(255,0,0)',
-                        'rgb(255, 145, 0)',
-                        'rgb(100, 0, 200)',
-                        'rgb(255, 215, 0)',
-                        'rgb(255, 0, 171)',
-                        'rgb(0, 100, 0)',
-                        'rgb(181, 100, 29)'
+                        'rgb(230,230,230)',
+                        'rgb(88,133,162)',
+                        'rgb(184,56,59)',
+                        'rgb(184, 128, 53)',
+                        'rgb(125, 64, 113)',
+                        'rgb(231, 181, 59)',
+                        'rgb(255, 105, 180)',
+                        'rgb(114, 158, 66)',
+                        'rgb(101, 71, 64)'
                     ],
                 }],
 
