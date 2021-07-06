@@ -109,10 +109,10 @@ function showNewClassStats(className) {
 
     for (var key in playerStats) {
         if (key.startsWith(`${className}.max.i`)) {
-            maxData[key] = playerStats[key];
+            maxData[key.substr(`${className}.max.i`.length).replace(/([A-Z]+)/g, " $1")] = playerStats[key];
         }
         if (key.startsWith(`${className}.accum.i`)) {
-            accumData[key] = playerStats[key];
+            accumData[key.substr(`${className}.accum.i`.length).replace(/([A-Z]+)/g, " $1")] = playerStats[key];
         }
     }
 
@@ -123,6 +123,7 @@ function showNewClassStats(className) {
     Object.entries(accumData).forEach(([key, value]) => {
         accumVals.push(value);
     });
+
     classMaxChart.data.datasets[0]["data"] = maxVals;
     classMaxChart.data.labels = Object.keys(maxData);
     classAccumChart.data.datasets[0]["data"] = accumVals;
