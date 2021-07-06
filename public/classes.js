@@ -91,3 +91,7 @@ var classAccumChart = new Chart(classAccumChartCanvas, {
         }
     }
 });
+
+function showNewClassStats(className) {
+    //TODO
+}
