@@ -32,6 +32,7 @@ function initCharts() {
             },
             scales: {
                 x: {
+                    type: 'logarithmic',
                     ticks: {
                         font: {
                             size: 15
@@ -76,6 +77,7 @@ function initCharts() {
             },
             scales: {
                 x: {
+                    type: 'logarithmic',
                     ticks: {
                         font: {
                             size: 15
@@ -92,16 +94,40 @@ function initCharts() {
             }
         }
     });
-    alert(classAccumChart.data.datasets[0]["data"])
 }
 
 initCharts();
 
 window.CLASSES.forEach((element) => document.getElementById(`class_stat_${element}`).addEventListener("click", function () { showNewClassStats(element) }));
-alert(classAccumChart.data.datasets[0]["data"])
 showNewClassStats("Scout");
 
 function showNewClassStats(className) {
-    classAccumChart.data.datasets[0]["data"] = [5, 10, 11]
+    maxData = {}
+    maxVals = []
+    accumData = {}
+    accumVals = []
+
+    for (var key in playerStats) {
+        if (key.startsWith(`${className}.max.i`)) {
+            maxData[key] = playerStats[key];
+        }
+        if (key.startsWith(`${className}.accum.i`)) {
+            accumData[key] = playerStats[key];
+        }
+    }
+
+    Object.entries(maxData).forEach(([key, value]) => {
+        maxVals.push(value);
+    });
+
+    Object.entries(accumData).forEach(([key, value]) => {
+        accumVals.push(value);
+    });
+    classMaxChart.data.datasets[0]["data"] = maxVals;
+    classMaxChart.data.labels = Object.keys(maxData);
+    classAccumChart.data.datasets[0]["data"] = accumVals;
+    classAccumChart.data.labels = Object.keys(accumData);
+
+    classMaxChart.update()
     classAccumChart.update()
 }
