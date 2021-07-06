@@ -126,6 +126,12 @@ input {
 .class_stat_icon {
     width: 10%;
     display: inline-block;
+    transition: transform 150ms;
+}
+
+.class_stat_icon:hover {
+    transform: scale(1.5);
+    display: inline-block;
 }
 
 .numericalStat {
