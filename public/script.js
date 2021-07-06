@@ -93,7 +93,7 @@ window.onload = function () {
         vals = []
         for (var key in playerStats) {
             if (key.endsWith(".accum.iPlayTime") && !CLASSES.some(substring => key.includes(substring)) && !key.endsWith(".mvm.accum.iPlayTime")) {
-                mapPlayTimeStats[key] = playerStats[key];
+                mapPlayTimeStats[key.substring(0, key.length - 16)] = playerStats[key];
             }
         }
     }
