@@ -58,7 +58,14 @@ canvas {
     margin-top: 20px;
     border-radius: 15px;
     background-color: rgba(17, 17, 17, 0.8);
-    width:45%;
+}
+
+#mapChart {
+    width:75%;
+}
+
+#classMaxChart, #classAccumChart {
+    width: 45%;
 }
 
 input {
