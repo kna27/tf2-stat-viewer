@@ -1,11 +1,11 @@
 @font-face {
     font-family: "TF2-Heading";
-    src: url(tf2build.ttf);
+    src: url(fonts/tf2build.ttf);
 }
 
 @font-face {
     font-family: "TF2-Secondary";
-    src: url(tf2secondary.ttf);
+    src: url(fonts/tf2secondary.ttf);
 }
 
 html, body {
@@ -14,7 +14,7 @@ html, body {
 
 body {
     text-align: center;
-    background-image: url("background.jpg");
+    background-image: url("img/background.jpg");
     background-size: 100%;
     background-color: #cccccc;
     color: white;
