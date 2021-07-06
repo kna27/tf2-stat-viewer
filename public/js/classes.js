@@ -102,6 +102,11 @@ window.CLASSES.forEach((element) => document.getElementById(`class_stat_${elemen
 showNewClassStats("Scout");
 
 function showNewClassStats(className) {
+
+    window.CLASSES.forEach(function (item) {
+        document.getElementById(`class_stat_${item}`).src = item == className ? `/img/class_icons_blu/${item}.png` : `/img/class_icons/${item}.png`;
+    });
+
     maxData = {}
     maxVals = []
     accumData = {}
