@@ -76,26 +76,16 @@ canvas {
     background-color: rgba(17, 17, 17, 0.8);
 }
 
+input {
+    width: 30%;
+}
+
 #mapChart {
     width: 75%;
 }
 
 #classMaxChart, #classAccumChart {
     width: 45%;
-}
-
-input {
-    width: 30%;
-}
-
-.content {
-    flex: 1 0 auto;
-    padding: 20px;
-}
-
-.content a {
-    color: white;
-    font-size: 1.5em;
 }
 
 #statsDiv {
@@ -123,13 +113,6 @@ input {
     text-align: right;
 }
 
-@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
-    #statsDiv {
-        -webkit-backdrop-filter: blur(5px);
-        backdrop-filter: blur(5px);
-    }
-}
-
 #numericalStats {
     display: inline-block;
     padding: 2%;
@@ -137,6 +120,21 @@ input {
     width: 90%;
     background-color: rgba(33, 33, 33, 0.5);
     border-radius: 25px;
+}
+
+#playtimeChart {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.content {
+    flex: 1 0 auto;
+    padding: 20px;
+}
+
+.content a {
+    color: white;
+    font-size: 1.5em;
 }
 
 .class_icons {
@@ -168,7 +166,9 @@ input {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-#playtimeChart {
-    margin-left: auto;
-    margin-right: auto;
+@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+    #statsDiv {
+        -webkit-backdrop-filter: blur(5px);
+        backdrop-filter: blur(5px);
+    }
 }
