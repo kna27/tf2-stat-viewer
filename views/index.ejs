@@ -26,7 +26,7 @@
         </form>
         <br>
         <div style="display:<%= typeof playerStats == 'undefined' ? 'none' : 'block' %>" id="statsDiv">
-            <h1>Overview</h1>
+            <h1 id="overview"><a href="#overview">Overview</a></h1>
             <h2>Class Playtime</h2>
             <canvas id="playtimeChart" width="600" height="600"></canvas>
             <h2>Collective Statis</h2>
@@ -56,23 +56,26 @@
                     <h2>Points Scored</h2>
                 </div>
             </div>
-            <h1>Class Stats</h1>
+            <br>
+            <h1 id="class_stats"><a href="#class_stats">Class Stats</a></h1>
             <div class="class_icons">
-                <img class = "class_stat_icon" id = "class_stat_Scout" src = "/img/class_icons/Scout.png">
-                <img class = "class_stat_icon" id = "class_stat_Soldier" src = "/img/class_icons/Soldier.png">
-                <img class = "class_stat_icon" id = "class_stat_Pyro" src = "/img/class_icons/Pyro.png">
-                <img class = "class_stat_icon" id = "class_stat_Demoman" src = "/img/class_icons/Demoman.png">
-                <img class = "class_stat_icon" id = "class_stat_Heavy" src = "/img/class_icons/Heavy.png">
-                <img class = "class_stat_icon" id = "class_stat_Engineer" src = "/img/class_icons/Engineer.png">
-                <img class = "class_stat_icon" id = "class_stat_Medic" src = "/img/class_icons/Medic.png">
-                <img class = "class_stat_icon" id = "class_stat_Sniper" src = "/img/class_icons/Sniper.png">
-                <img class = "class_stat_icon" id = "class_stat_Spy" src = "/img/class_icons/Spy.png">
+                <img class="class_stat_icon" id="class_stat_Scout" src="/img/class_icons/Scout.png">
+                <img class="class_stat_icon" id="class_stat_Soldier" src="/img/class_icons/Soldier.png">
+                <img class="class_stat_icon" id="class_stat_Pyro" src="/img/class_icons/Pyro.png">
+                <img class="class_stat_icon" id="class_stat_Demoman" src="/img/class_icons/Demoman.png">
+                <img class="class_stat_icon" id="class_stat_Heavy" src="/img/class_icons/Heavy.png">
+                <img class="class_stat_icon" id="class_stat_Engineer" src="/img/class_icons/Engineer.png">
+                <img class="class_stat_icon" id="class_stat_Medic" src="/img/class_icons/Medic.png">
+                <img class="class_stat_icon" id="class_stat_Sniper" src="/img/class_icons/Sniper.png">
+                <img class="class_stat_icon" id="class_stat_Spy" src="/img/class_icons/Spy.png">
             </div>
             <canvas id="classMaxChart" width="600" height="600" style="display:inline-block"></canvas>
             <canvas id="classAccumChart" width="600" height="600" style="display:inline-block"></canvas>
-            <h1>Map Stats</h1>
+            <br>
+            <h1 id="map_stats"><a href="#map_stats">Map Stats</a></h1>
             <canvas id="mapChart" width="1000" height="750" style="display:inline-block"></canvas>
-            <h1>MvM Stats</h1>
+            <br>
+            <h1 id="mvm_stats"><a href="#mvm_stats">MvM Stats</a></h1>
             <h2>Coming soon!</h2>
         </div>
     </div>
