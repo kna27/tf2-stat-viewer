@@ -78,6 +78,11 @@ canvas {
 
 input {
     width: 30%;
+    line-height: 32px;
+}
+
+input:focus {
+    border: 3px solid #555;
 }
 
 #mapChart {
