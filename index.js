@@ -30,7 +30,7 @@ async function safeParseJSON(response, res) {
   } catch (err) {
     console.error("Error Parsing JSON:", err);
     console.error("Response body:", body);
-    res.render('404');
+    res.render('profile_not_found');
   }
 }
 
@@ -39,7 +39,7 @@ function fetchJson(id, req, resp) {
   var url = `http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v2/?key=${process.env.API_KEY}&appid=440&steamid=${id}&count=1&format=json`;
   try {
     fetch(url, settings).catch((err) => {
-      resp.render('404');
+      resp.render('profile_not_found');
       console.log("Error fetching JSON: " + err)
       return;
     })
@@ -50,7 +50,7 @@ function fetchJson(id, req, resp) {
           renderStats(resp, allStats);
         }
         else {
-          resp.render('404');
+          resp.render('profile_not_found');
         }
       })
   } catch (err) {
@@ -64,7 +64,7 @@ function jsonToDict(jsonStats, res) {
   var achivmentStats = jsonStats.playerstats.achivments;
   let dictStats = {}
   if (stats == null) {
-    res.render('404');
+    res.render('profile_not_found');
     return;
   } else {
     for (let i = 0; i < stats.length; i++) {
@@ -132,7 +132,7 @@ app.get('/profile/:id', (req, res) => {
             }
             else {
               // User didn't submit a valid account, send 404 page
-              res.render('404');
+              res.render('profile_not_found');
             }
           });
       }
