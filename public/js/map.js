@@ -1,12 +1,8 @@
-playerStats = window.playerStats;
-
-//--- MAP STATS ---//
-
 var mapPlayTimeStats = {}
 vals = []
-for (var key in playerStats) {
+for (var key in window.playerStats) {
     if (key.endsWith(".accum.iPlayTime") && !window.CLASSES.some(substring => key.includes(substring)) && !key.endsWith(".mvm.accum.iPlayTime")) {
-        mapPlayTimeStats[key.substring(0, key.length - 16)] = playerStats[key];
+        mapPlayTimeStats[key.substring(0, key.length - 16)] = window.playerStats[key];
     }
 }
 

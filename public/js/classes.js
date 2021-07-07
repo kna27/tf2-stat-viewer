@@ -1,6 +1,3 @@
-playerStats = window.playerStats;
-//--- CLASS STATS ---//
-
 let classMaxChart;
 let classAccumChart;
 
@@ -21,13 +18,17 @@ function initCharts() {
         options: {
             indexAxis: 'y',
             responsive: false,
-            title: {
-                display: true,
-                text: "Class Maximum Stats"
-            },
+
             plugins: {
                 legend: {
                     display: false
+                },
+                title: {
+                    display: true,
+                    font: {
+                        size: 22
+                    },
+                    text: "Maximum Stats",
                 }
             },
             scales: {
@@ -59,20 +60,23 @@ function initCharts() {
                 data: [1, 5, 2],
                 backgroundColor: [
                     'rgb(88,133,162)',
-                ],
+                ]
             }],
 
         },
         options: {
             indexAxis: 'y',
             responsive: false,
-            title: {
-                display: true,
-                text: "Class Total Stats"
-            },
             plugins: {
                 legend: {
                     display: false
+                },
+                title: {
+                    display: true,
+                    font: {
+                        size: 22
+                    },
+                    text: "Total Stats"
                 }
             },
             scales: {
@@ -112,12 +116,12 @@ function showNewClassStats(className) {
     accumData = {}
     accumVals = []
 
-    for (var key in playerStats) {
+    for (var key in window.playerStats) {
         if (key.startsWith(`${className}.max.i`)) {
-            maxData[key.substr(`${className}.max.i`.length).replace(/([A-Z]+)/g, " $1")] = playerStats[key];
+            maxData[key.substr(`${className}.max.i`.length).replace(/([A-Z]+)/g, " $1")] = window.playerStats[key];
         }
         if (key.startsWith(`${className}.accum.i`)) {
-            accumData[key.substr(`${className}.accum.i`.length).replace(/([A-Z]+)/g, " $1")] = playerStats[key];
+            accumData[key.substr(`${className}.accum.i`.length).replace(/([A-Z]+)/g, " $1")] = window.playerStats[key];
         }
     }
 
