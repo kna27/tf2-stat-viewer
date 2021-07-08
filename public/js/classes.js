@@ -18,7 +18,6 @@ function initCharts() {
         options: {
             indexAxis: 'y',
             responsive: false,
-
             plugins: {
                 legend: {
                     display: false
