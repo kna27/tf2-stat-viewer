@@ -139,6 +139,8 @@ app.get('/profile/:id', (req, res) => {
     });
 });
 
+app.get("/about", (req, res) => res.render('about'));
+
 // Catch all other pages and serve 404 error page
 app.get('*', function (req, res) {
   res.status(404).render('404');

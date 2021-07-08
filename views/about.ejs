@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0" />
+    <meta name="description" content="View your personal TF2 stats">
+    <title>About</title>
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <link rel="icon" type="image/png" href="/img/icon.png" />
+</head>
+
+<body>
+    <div class="content">
+        <h1 class="headerText">Hello!</h1>
+        <br>
+        <p class="headerText">I made this website after finding out that there was nothing similar already. I like
+            playing TF2, CS:GO, and Portal games. I like programming random projects such as this one. You can see my
+            other projects <a href="https://github.com/kna27" target="_blank" rel="noopener">on my Github profile</a>.
+            If you really liked this site, <a
+                href="https://steamcommunity.com/tradeoffer/new/?partner=999725813&token=MrJwU4TO" target="_blank"
+                rel="noopener">consider sending me an item ;)</a> Thank you for checking out the site, it means a lot to
+            me!</p>
+        <a href="/profile/kna27">My personal stats</a>
+        <br>
+        <br>
+        <a href="/home" class="headerText">Return home</a>
+        <br>
+        <br>
+        <form>
+            <input type="text" id="steamid" name="steamid" placeholder="Enter your Steam name or Steam64 ID">
+            <button type="submit" id="submit"
+                onclick="window.location = window.origin + '/profile/' + steamid.value; return false;">Submit</button>
+        </form>
+    </div>
+    <%- include("footer") %>
+</body>
+
+</html>
