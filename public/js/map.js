@@ -18,36 +18,38 @@ let mapChart = new Chart(mapChartCanvas, {
         labels: Object.keys(mapPlayTimeStats),
         datasets: [{
             data: vals,
-            backgroundColor: 'rgb(184, 56, 59)'
+            backgroundColor: [
+                'rgb(184,56,59)',
+            ]
         }],
-        options: {
-            indexAxis: 'y',
-            responsive: false,
-            plugins: {
-                legend: {
-                    display: false
-                },
-                title: {
-                    display: true,
-                    font: {
-                        size: 22
-                    },
-                    text: "Map Playtime"
-                },
+    },
+    options: {
+        indexAxis: 'y',
+        responsive: false,
+        plugins: {
+            legend: {
+                display: false
             },
-            scales: {
-                x: {
-                    ticks: {
-                        font: {
-                            size: 15
-                        }
-                    }
+            title: {
+                display: true,
+                font: {
+                    size: 22
                 },
-                y: {
-                    ticks: {
-                        font: {
-                            size: 24
-                        }
+                text: "Hours Played"
+            }
+        },
+        scales: {
+            x: {
+                ticks: {
+                    font: {
+                        size: 15
+                    }
+                }
+            },
+            y: {
+                ticks: {
+                    font: {
+                        size: 14
                     }
                 }
             }

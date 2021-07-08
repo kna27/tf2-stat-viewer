@@ -6,9 +6,9 @@ function initCharts() {
     classMaxChart = new Chart(classMaxChartCanvas, {
         type: "bar",
         data: {
-            labels: ["a", "b", "c"],
+            labels: [],
             datasets: [{
-                data: [2, 6, 1],
+                data: [],
                 backgroundColor: [
                     'rgb(88,133,162)',
                 ],
@@ -55,9 +55,9 @@ function initCharts() {
     classAccumChart = new Chart(classAccumChartCanvas, {
         type: "bar",
         data: {
-            labels: ["a", "b", "c"],
+            labels: [],
             datasets: [{
-                data: [1, 5, 2],
+                data: [],
                 backgroundColor: [
                     'rgb(88,133,162)',
                 ]
