@@ -19,6 +19,9 @@ app.use(express.static(__dirname + '/public'));
 // Use ejs as the view engine
 app.set('view engine', 'ejs');
 
+lib.createFile("./searches")
+var searches = lib.readFile("./searches");
+
 //--- ROUTING REQUESTS ---//
 
 // Home page
@@ -26,6 +29,8 @@ app.get(["/", "/home"], (req, res) => res.render('index'));
 
 // Profile pages
 app.get('/profile/:id', (req, res) => {
+  searches++;
+  lib.writeFile("./searches", searches.toString());
   // Check if ID is a valid Steam account 
   fetch(`http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/?key=${process.env.API_KEY}&steamids=${req.params.id}`, settings)
     .then(res => res.json())
@@ -52,6 +57,7 @@ app.get('/profile/:id', (req, res) => {
     });
 });
 
+// About page
 app.get("/about", (req, res) => res.render('about'));
 
 // Catch all other pages and serve 404 error page

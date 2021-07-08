@@ -1,7 +1,13 @@
+// Dependencies
 const fetch = require('node-fetch');
+const fs = require("fs");
 
+// Constants
 const settings = { method: "Get" };
 const MAPPREFIXES = ["arena_", "cp_", "ctf_", "koth_", "mvm_", "pass_", "pd_", "pl_", "plr_", "rd_", "sd_", "tc_", "tr_"];
+
+
+//--- GETTING JSON STATS ---//
 
 // Used to check if JSON is not an HTML response and parses it
 async function safeParseJSON(response, res) {
@@ -86,4 +92,32 @@ function renderStats(res, stats) {
     });
 }
 
-module.exports = { fetchJson };
+
+//--- FILES READING, WRITING, CREATION ---//
+
+function createFile(filename) {
+    if (!fs.existsSync(filename)) {
+        fs.closeSync(fs.openSync(filename, 'w'));
+    }
+}
+
+function readFile(filename) {
+    try {
+        const data = fs.readFileSync(filename, 'utf8')
+        return data;
+    } catch (err) {
+        console.error(err);
+        return 0;
+    }
+}
+
+function writeFile(filename, content) {
+    fs.writeFile(filename, content, err => {
+        if (err) {
+            console.error(err);
+            return;
+        }
+    })
+}
+
+module.exports = { fetchJson, createFile, readFile, writeFile };
