@@ -116,10 +116,10 @@ function showNewClassStats(className) {
     accumVals = []
 
     for (var key in window.playerStats) {
-        if (key.startsWith(`${className}.max.i`)) {
+        if (key.startsWith(`${className}.max.i`) && window.playerStats[key] != 0) {
             maxData[key.substr(`${className}.max.i`.length).replace(/([A-Z]+)/g, " $1")] = window.playerStats[key];
         }
-        if (key.startsWith(`${className}.accum.i`)) {
+        if (key.startsWith(`${className}.accum.i`) && window.playerStats[key] != 0) {
             accumData[key.substr(`${className}.accum.i`.length).replace(/([A-Z]+)/g, " $1")] = window.playerStats[key];
         }
     }

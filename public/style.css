@@ -81,6 +81,10 @@ input {
     line-height: 32px;
 }
 
+button {
+    line-height: 32px;
+}
+
 input:focus {
     border: 3px solid #555;
 }
@@ -176,14 +180,21 @@ input:focus {
     }
 }
 
+#msgText {
+    display: none;
+}
+
 @media (max-width: 900px) {
-    #statsDiv {
-        width: 100%;
-    }
     input {
         width: 60%;
     }
+    #statsDiv {
+        width: 100%;
+    }
+    #msgText {
+        display: block;
+    }
     .headerText {
-        background-color:#555;
+        background-color: #555;
     }
 }

@@ -59,7 +59,7 @@ let mapChart = new Chart(mapChartCanvas, {
             y: {
                 ticks: {
                     font: {
-                        size: 14
+                        size: 13
                     }
                 }
             }
