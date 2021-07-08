@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="View your personal TF2 stats">
     <title>TF2 Stats</title>
     <link rel="stylesheet" type="text/css" href="/style.css">
@@ -14,9 +14,9 @@
 
 <body>
     <div class="content">
-        <h1><a href="/home">TF2 Stat Viewer</a></h1>
-        <h2>View your personal TF2 stats</h2>
-        <p>
+        <h1 class="headerText"><a href="/home">TF2 Stat Viewer</a></h1>
+        <h2 class="headerText">View your personal TF2 stats</h2>
+        <p class="headerText">
             <%= typeof msg !='undefined' ? msg : '' %>
         </p>
         <form>
@@ -59,15 +59,24 @@
             <br>
             <h1 id="class_stats"><a href="#class_stats">Class Stats</a></h1>
             <div class="class_icons">
-                <img class="class_stat_icon" id="class_stat_Scout" src="/img/class_icons/Scout.png" alt="Scout Icon" draggable="false">
-                <img class="class_stat_icon" id="class_stat_Soldier" src="/img/class_icons/Soldier.png" alt="Soldier Icon" draggable="false">
-                <img class="class_stat_icon" id="class_stat_Pyro" src="/img/class_icons/Pyro.png" alt="Pyro Icon" draggable="false">
-                <img class="class_stat_icon" id="class_stat_Demoman" src="/img/class_icons/Demoman.png" alt="Demoman Icon" draggable="false">
-                <img class="class_stat_icon" id="class_stat_Heavy" src="/img/class_icons/Heavy.png" alt="Heavy Icon" draggable="false">
-                <img class="class_stat_icon" id="class_stat_Engineer" src="/img/class_icons/Engineer.png" alt="Engineer Icon" draggable="false">
-                <img class="class_stat_icon" id="class_stat_Medic" src="/img/class_icons/Medic.png" alt="Medic Icon" draggable="false">
-                <img class="class_stat_icon" id="class_stat_Sniper" src="/img/class_icons/Sniper.png" alt="Sniper Icon" draggable="false">
-                <img class="class_stat_icon" id="class_stat_Spy" src="/img/class_icons/Spy.png" alt="Spy Icon" draggable="false">
+                <img class="class_stat_icon" id="class_stat_Scout" src="/img/class_icons/Scout.png" alt="Scout Icon"
+                    draggable="false">
+                <img class="class_stat_icon" id="class_stat_Soldier" src="/img/class_icons/Soldier.png"
+                    alt="Soldier Icon" draggable="false">
+                <img class="class_stat_icon" id="class_stat_Pyro" src="/img/class_icons/Pyro.png" alt="Pyro Icon"
+                    draggable="false">
+                <img class="class_stat_icon" id="class_stat_Demoman" src="/img/class_icons/Demoman.png"
+                    alt="Demoman Icon" draggable="false">
+                <img class="class_stat_icon" id="class_stat_Heavy" src="/img/class_icons/Heavy.png" alt="Heavy Icon"
+                    draggable="false">
+                <img class="class_stat_icon" id="class_stat_Engineer" src="/img/class_icons/Engineer.png"
+                    alt="Engineer Icon" draggable="false">
+                <img class="class_stat_icon" id="class_stat_Medic" src="/img/class_icons/Medic.png" alt="Medic Icon"
+                    draggable="false">
+                <img class="class_stat_icon" id="class_stat_Sniper" src="/img/class_icons/Sniper.png" alt="Sniper Icon"
+                    draggable="false">
+                <img class="class_stat_icon" id="class_stat_Spy" src="/img/class_icons/Spy.png" alt="Spy Icon"
+                    draggable="false">
             </div>
             <canvas id="classMaxChart" width="600" height="600" style="display:inline-block"></canvas>
             <canvas id="classAccumChart" width="600" height="600" style="display:inline-block"></canvas>

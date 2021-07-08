@@ -23,14 +23,17 @@ let mapChart = new Chart(mapChartCanvas, {
         options: {
             indexAxis: 'y',
             responsive: false,
-            title: {
-                display: true,
-                text: "Map Playtime"
-            },
             plugins: {
                 legend: {
                     display: false
-                }
+                },
+                title: {
+                    display: true,
+                    font: {
+                        size: 22
+                    },
+                    text: "Map Playtime"
+                },
             },
             scales: {
                 x: {
