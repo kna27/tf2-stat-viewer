@@ -4,12 +4,9 @@ let mvmClassAccumChart;
 document.getElementById("numericalStat_RobotsKills").innerHTML = window.playerStats['TF_MVM_KILL_ROBOT_MEGA_GRIND_STAT']
 document.getElementById("numericalStat_Money").innerHTML = window.playerStats['TF_MVM_COLLECT_MONEY_GRIND_STAT']
 
-window.CLASSES.forEach((element) => document.getElementById(`mvm_class_stat_${element}`).addEventListener("click", function () { showNewClassStats(element) }));
-showNewClassStats("Scout");
-
-function initCharts() {
-    let classMaxChartCanvas = document.getElementById("mvmClassMaxChart").getContext("2d");
-    classMaxChart = new Chart(classMaxChartCanvas, {
+function initMvmCharts() {
+    let mvmClassMaxChartCanvas = document.getElementById("mvmClassMaxChart").getContext("2d");
+    mvmClassMaxChart = new Chart(mvmClassMaxChartCanvas, {
         type: "bar",
         data: {
             labels: [],
@@ -56,8 +53,8 @@ function initCharts() {
         }
     });
 
-    var classAccumChartCanvas = document.getElementById("mvmClassAccumChart").getContext("2d");
-    classAccumChart = new Chart(classAccumChartCanvas, {
+    var mvmClassAccumChartCanvas = document.getElementById("mvmClassAccumChart").getContext("2d");
+    mvmClassAccumChart = new Chart(mvmClassAccumChartCanvas, {
         type: "bar",
         data: {
             labels: [],
@@ -105,41 +102,43 @@ function initCharts() {
     });
 }
 
-initCharts();
+initMvmCharts();
 
-function showNewClassStats(className) {
+window.CLASSES.forEach((element) => document.getElementById(`mvm_class_stat_${element}`).addEventListener("click", function () { showNewMvmClassStats(element) }));
+showNewMvmClassStats("Scout");
 
+function showNewMvmClassStats(className) {
     window.CLASSES.forEach(function (item) {
         document.getElementById(`mvm_class_stat_${item}`).src = item == className ? `/img/class_icons_blu/${item}.png` : `/img/class_icons/${item}.png`;
     });
 
-    maxData = {}
-    maxVals = []
-    accumData = {}
-    accumVals = []
+    maxMvmData = {}
+    maxMvmVals = []
+    accumMvmData = {}
+    accumMvmVals = []
 
     for (var key in window.playerStats) {
         if (key.startsWith(`${className}.mvm.max.i`) && window.playerStats[key] != 0) {
-            maxData[key.substr(`${className}.mvm.max.i`.length).replace(/([A-Z]+)/g, " $1")] = window.playerStats[key];
+            maxMvmData[key.substr(`${className}.mvm.max.i`.length).replace(/([A-Z]+)/g, " $1")] = window.playerStats[key];
         }
         if (key.startsWith(`${className}.mvm.accum.i`) && window.playerStats[key] != 0) {
-            accumData[key.substr(`${className}.mvm.accum.i`.length).replace(/([A-Z]+)/g, " $1")] = window.playerStats[key];
+            accumMvmData[key.substr(`${className}.mvm.accum.i`.length).replace(/([A-Z]+)/g, " $1")] = window.playerStats[key];
         }
     }
 
-    Object.entries(maxData).forEach(([key, value]) => {
-        maxVals.push(value);
+    Object.entries(maxMvmData).forEach(([key, value]) => {
+        maxMvmVals.push(value);
     });
 
-    Object.entries(accumData).forEach(([key, value]) => {
-        accumVals.push(value);
+    Object.entries(accumMvmData).forEach(([key, value]) => {
+        accumMvmVals.push(value);
     });
 
-    classMaxChart.data.datasets[0]["data"] = maxVals;
-    classMaxChart.data.labels = Object.keys(maxData);
-    classAccumChart.data.datasets[0]["data"] = accumVals;
-    classAccumChart.data.labels = Object.keys(accumData);
+    mvmClassMaxChart.data.datasets[0]["data"] = maxMvmVals;
+    mvmClassMaxChart.data.labels = Object.keys(maxMvmData);
+    mvmClassAccumChart.data.datasets[0]["data"] = accumMvmVals;
+    mvmClassAccumChart.data.labels = Object.keys(accumMvmData);
 
-    classMaxChart.update()
-    classAccumChart.update()
+    mvmClassMaxChart.update()
+    mvmClassAccumChart.update()
 }
