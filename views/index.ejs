@@ -28,7 +28,7 @@
             <h2>Class Playtime</h2>
             <canvas id="playtimeChart" width="600" height="600"></canvas>
             <h2>Collective Statis</h2>
-            <div id="numericalStats">
+            <div class="numericalStats">
                 <div class="numericalStat">
                     <h1 id="numericalStat_Kills"></h1>
                     <h2>Kills</h2>
@@ -84,7 +84,41 @@
             <canvas id="mapChart" width="800" height="1000" style="display:inline-block"></canvas>
             <br>
             <h1 id="mvm_stats"><a href="#mvm_stats">MvM Stats</a></h1>
-            <h2>Coming soon!</h2>
+            <br>
+            <div class="mvmNumericalStats">
+                <div class="mvmNumericalStat">
+                    <h1 id="numericalStat_RobotsKills"></h1>
+                    <h2>Total Robots Killed</h2>
+                </div>
+                <div class="mvmNumericalStat">
+                    <h1 id="numericalStat_Money"></h1>
+                    <h2>Total Money Collected</h2>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="class_icons">
+                <img class="class_stat_icon" id="mvm_class_stat_Scout" src="/img/class_icons/Scout.png" alt="Scout Icon"
+                    draggable="false">
+                <img class="class_stat_icon" id="mvm_class_stat_Soldier" src="/img/class_icons/Soldier.png"
+                    alt="Soldier Icon" draggable="false">
+                <img class="class_stat_icon" id="mvm_class_stat_Pyro" src="/img/class_icons/Pyro.png" alt="Pyro Icon"
+                    draggable="false">
+                <img class="class_stat_icon" id="mvm_class_stat_Demoman" src="/img/class_icons/Demoman.png"
+                    alt="Demoman Icon" draggable="false">
+                <img class="class_stat_icon" id="mvm_class_stat_Heavy" src="/img/class_icons/Heavy.png" alt="Heavy Icon"
+                    draggable="false">
+                <img class="class_stat_icon" id="mvm_class_stat_Engineer" src="/img/class_icons/Engineer.png"
+                    alt="Engineer Icon" draggable="false">
+                <img class="class_stat_icon" id="mvm_class_stat_Medic" src="/img/class_icons/Medic.png" alt="Medic Icon"
+                    draggable="false">
+                <img class="class_stat_icon" id="mvm_class_stat_Sniper" src="/img/class_icons/Sniper.png" alt="Sniper Icon"
+                    draggable="false">
+                <img class="class_stat_icon" id="mvm_class_stat_Spy" src="/img/class_icons/Spy.png" alt="Spy Icon"
+                    draggable="false">
+            </div>
+            <canvas id="mvmClassMaxChart" width="600" height="600" style="display:inline-block"></canvas>
+            <canvas id="mvmClassAccumChart" width="600" height="600" style="display:inline-block"></canvas>
         </div>
     </div>
     <%- include("footer") %>
