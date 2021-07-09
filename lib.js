@@ -96,14 +96,20 @@ function renderStats(res, stats) {
 //--- FILES READING, WRITING, CREATION ---//
 
 function createFile(filename) {
+    console.log("Making file...")
     if (!fs.existsSync(filename)) {
         fs.closeSync(fs.openSync(filename, 'w'));
+        console.log("File created")
+    }
+    else {
+        console.log("File already exists")
     }
 }
 
 function readFile(filename) {
     try {
         const data = fs.readFileSync(filename, 'utf8')
+        console.log(data)
         return data;
     } catch (err) {
         console.error(err);
@@ -112,6 +118,7 @@ function readFile(filename) {
 }
 
 function writeFile(filename, content) {
+    console.log("writing content:" + content)
     fs.writeFile(filename, content, err => {
         if (err) {
             console.error(err);
