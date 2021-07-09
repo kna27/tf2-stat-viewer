@@ -19,7 +19,6 @@ app.use(express.static(__dirname + '/public'));
 // Use ejs as the view engine
 app.set('view engine', 'ejs');
 
-console.log("calling create file")
 lib.createFile("./searches")
 var searches = lib.readFile("./searches");
 
