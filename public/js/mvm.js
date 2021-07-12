@@ -1,7 +1,6 @@
 let mvmClassMaxChart;
 let mvmClassAccumChart;
-
-document.getElementById("numericalStat_RobotsKills").innerHTML = window.playerStats['TF_MVM_KILL_ROBOT_MEGA_GRIND_STAT']
+document.getElementById("numericalStat_RobotsKills").innerHTML = ((window.playerStats['Scout.mvm.accum.iNumberOfKills'] === undefined) ? 0 : window.playerStats['Scout.mvm.accum.iNumberOfKills']) + ((window.playerStats['Soldier.mvm.accum.iNumberOfKills'] === undefined) ? 0 : window.playerStats['Soldier.mvm.accum.iNumberOfKills']) + ((window.playerStats['Pyro.mvm.accum.iNumberOfKills'] === undefined) ? 0 : window.playerStats['Pyro.mvm.accum.iNumberOfKills']) + ((window.playerStats['Demoman.mvm.accum.iNumberOfKills'] === undefined) ? 0 : window.playerStats['Demoman.mvm.accum.iNumberOfKills']) + ((window.playerStats['Heavy.mvm.accum.iNumberOfKills'] === undefined) ? 0 : window.playerStats['Heavy.mvm.accum.iNumberOfKills']) + ((window.playerStats['Engineer.mvm.accum.iNumberOfKills'] === undefined) ? 0 : window.playerStats['Engineer.mvm.accum.iNumberOfKills']) + ((window.playerStats['Medic.mvm.accum.iNumberOfKills'] === undefined) ? 0 : window.playerStats['Medic.mvm.accum.iNumberOfKills']) + ((window.playerStats['Sniper.mvm.accum.iNumberOfKills'] === undefined) ? 0 : window.playerStats['Sniper.mvm.accum.iNumberOfKills']) + ((window.playerStats['Spy.mvm.accum.iNumberOfKills'] === undefined) ? 0 : window.playerStats['Spy.mvm.accum.iNumberOfKills']);
 document.getElementById("numericalStat_Money").innerHTML = window.playerStats['TF_MVM_COLLECT_MONEY_GRIND_STAT']
 
 function initMvmCharts() {
