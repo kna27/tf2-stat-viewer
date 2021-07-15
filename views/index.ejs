@@ -16,18 +16,26 @@
     <div class="content">
         <h1 class="headerText"><a href="/home">TF2 Stat Viewer</a></h1>
         <h2 class="headerText">View your personal TF2 stats</h2>
-        <p id="msgText" class="headerText">Charts may look off on your platform. Please visit this website on desktop for the best experience.</p>
+        <p id="msgText" class="headerText">Charts may look off on your screen size. Please visit this website on desktop
+            for the best experience.</p>
         <form>
             <input type="text" id="steamid" name="steamid" placeholder="Enter your Steam name or Steam64 ID">
             <button type="submit" id="submit"
                 onclick="window.location = window.origin + '/profile/' + steamid.value; return false;">Submit</button>
         </form>
         <br>
+        <figure style="display:<%= typeof playerStats == 'undefined' ? 'none' : 'block' %>">
+            <img id="profilePicture" src=<%=typeof profilePicture !='undefined' ? profilePicture : '/' %>
+            alt="Profile Picture" style="width: 128px;height:128px;">
+            <figcaption style="font-size: 2em">
+                <%=typeof nickName !='undefined' ? nickName : '' %>
+            </figcaption>
+        </figure>
         <div style="display:<%= typeof playerStats == 'undefined' ? 'none' : 'block' %>" id="statsDiv">
             <h1 id="overview"><a href="#overview">Overview</a></h1>
             <h2>Class Playtime</h2>
             <canvas id="playtimeChart" width="600" height="600"></canvas>
-            <h2>Collective Statis</h2>
+            <h2>Collective Stats</h2>
             <div class="numericalStats">
                 <div class="numericalStat">
                     <h1 id="numericalStat_Kills"></h1>
@@ -112,8 +120,8 @@
                     alt="Engineer Icon" draggable="false">
                 <img class="class_stat_icon" id="mvm_class_stat_Medic" src="/img/class_icons/Medic.png" alt="Medic Icon"
                     draggable="false">
-                <img class="class_stat_icon" id="mvm_class_stat_Sniper" src="/img/class_icons/Sniper.png" alt="Sniper Icon"
-                    draggable="false">
+                <img class="class_stat_icon" id="mvm_class_stat_Sniper" src="/img/class_icons/Sniper.png"
+                    alt="Sniper Icon" draggable="false">
                 <img class="class_stat_icon" id="mvm_class_stat_Spy" src="/img/class_icons/Spy.png" alt="Spy Icon"
                     draggable="false">
             </div>

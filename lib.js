@@ -22,7 +22,7 @@ async function safeParseJSON(response, res) {
 }
 
 // Fetches player stats JSON from the Steam API 
-function fetchJson(id, req, resp) {
+function fetchJson(id, req, resp, pfp, name) {
     var url = `http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v2/?key=${process.env.API_KEY}&appid=440&steamid=${id}&count=1&format=json`;
     try {
         fetch(url, settings).catch((err) => {
@@ -34,7 +34,7 @@ function fetchJson(id, req, resp) {
             .then((json) => {
                 if (json != null) {
                     let allStats = formatStats(jsonToDict(json, resp));
-                    renderStats(resp, allStats);
+                    renderStats(resp, allStats, pfp, name);
                 }
                 else {
                     resp.render('profile_not_found');
@@ -86,9 +86,11 @@ function formatStats(statsDict) {
 }
 
 // Render and send the stats to the ejs page
-function renderStats(res, stats) {
+function renderStats(res, stats, pfp, name) {
     res.render('index', {
-        playerStats: stats
+        playerStats: stats,
+        profilePicture: pfp,
+        nickName: name
     });
 }
 

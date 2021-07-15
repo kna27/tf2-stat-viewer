@@ -37,7 +37,7 @@ app.get('/profile/:id', (req, res) => {
     .then((json) => {
       if (json.response.players.length != 0) {
         // Fetch user stats JSON if it is
-        lib.fetchJson(req.params.id, req, res);
+        lib.fetchJson(req.params.id, req, res, json.response.players[0]["avatarfull"], json.response.players[0]["personaname"]);
       }
       else {
         // If it isn't a valid ID, check if it is a valid vanity URL
@@ -46,7 +46,11 @@ app.get('/profile/:id', (req, res) => {
           .then((json) => {
             if (json.response.success == 1) {
               // Fetch JSON using vanity URL's ID
-              lib.fetchJson(json.response.steamid, req, res);
+              fetch(`http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/?key=${process.env.API_KEY}&steamids=${json.response.steamid}`, settings)
+                .then(res => res.json())
+                .then((infoJson) => {
+                  lib.fetchJson(json.response.steamid, req, res, infoJson.response.players[0]["avatarfull"], infoJson.response.players[0]["personaname"]);
+                });
             }
             else {
               // User didn't submit a valid account, send 404 page
