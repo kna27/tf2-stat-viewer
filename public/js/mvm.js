@@ -104,7 +104,13 @@ function initMvmCharts() {
 initMvmCharts();
 
 window.CLASSES.forEach((element) => document.getElementById(`mvm_class_stat_${element}`).addEventListener("click", function () { showNewMvmClassStats(element) }));
-showNewMvmClassStats("Scout");
+mvmClassPlayTime = {}
+window.CLASSES.forEach((element) => mvmClassPlayTime[element] = parseFloat(window.playerStats[element + ".mvm.accum.iPlayTime"]));
+var showClass = "Scout";
+for (var key in mvmClassPlayTime) {
+    showClass = (mvmClassPlayTime[showClass] < parseFloat(mvmClassPlayTime[key])) ? key : showClass;
+}
+showNewMvmClassStats(showClass);
 
 function showNewMvmClassStats(className) {
     window.CLASSES.forEach(function (item) {

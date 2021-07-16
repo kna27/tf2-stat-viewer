@@ -102,7 +102,13 @@ function initCharts() {
 initCharts();
 
 window.CLASSES.forEach((element) => document.getElementById(`class_stat_${element}`).addEventListener("click", function () { showNewClassStats(element) }));
-showNewClassStats("Scout");
+classPlayTime = {}
+window.CLASSES.forEach((element) => classPlayTime[element] = parseFloat(window.playerStats[element + ".accum.iPlayTime"]));
+var showClass = "Scout";
+for (var key in classPlayTime) {
+    showClass = (classPlayTime[showClass] < parseFloat(classPlayTime[key])) ? key : showClass;
+}
+showNewClassStats(showClass);
 
 function showNewClassStats(className) {
 
