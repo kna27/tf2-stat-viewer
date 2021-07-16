@@ -27,7 +27,7 @@
         <figure style="display:<%= typeof playerStats == 'undefined' ? 'none' : 'block' %>">
             <img id="profilePicture" src=<%=typeof profilePicture !='undefined' ? profilePicture : '/' %>
             alt="Profile Picture" style="width: 128px;height:128px;">
-            <figcaption style="font-size: 2em">
+            <figcaption id="nickname">
                 <%=typeof nickName !='undefined' ? nickName : '' %>
             </figcaption>
         </figure>
