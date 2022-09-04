@@ -17,7 +17,7 @@ async function safeParseJSON(response, res) {
     } catch (err) {
         console.error("Error Parsing JSON:", err);
         console.error("Response body:", body);
-        res.render('profile_not_found');
+        res.render('private_profile');
     }
 }
 
