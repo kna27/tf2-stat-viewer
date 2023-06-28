@@ -1,5 +1,5 @@
 # TF2 Stat Viewer
-https://tf2playerstats.herokuapp.com/
+[https://tf2stats.onrender.com/](https://tf2stats.onrender.com)
 ## About
 
 A website where you can see your personal Team Fortress 2 statistics in graphs, tables, and charts using the Steam API! All you have to do is just put in your username.
