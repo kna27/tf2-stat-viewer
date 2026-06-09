@@ -3,30 +3,28 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="View your personal TF2 stats">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="View your personal TF2 stats" />
     <title>TF2 Stats</title>
-    <link rel="stylesheet" type="text/css" href="/style.css">
+    <link rel="stylesheet" type="text/css" href="/style.css" />
     <link rel="icon" type="image/png" href="/img/icon.png" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.4.1/dist/chart.min.js"></script>
 </head>
 
 <body>
     <div class="content">
-        <h1 class="headerText"><a href="/home">TF2 Stat Viewer</a></h1>
+        <h1 class="headerText"><a href="/">TF2 Stat Viewer</a></h1>
         <h2 class="headerText">View your personal TF2 stats</h2>
-        <p id="msgText" class="headerText">Charts may look off on your screen size. Please visit this website on desktop
-            for the best experience.</p>
-        <form>
-            <input type="text" id="steamid" name="steamid" placeholder="Enter your Steam name or Steam64 ID">
-            <button type="submit" id="submit"
-                onclick="window.location = window.origin + '/profile/' + steamid.value; return false;">Submit</button>
-        </form>
-        <br>
+        <p id="msgText" class="headerText">
+            Charts may look off on your screen size. Please visit this
+            website on desktop for the best experience.
+        </p>
+        <%- include("search_form") %>
+        <br />
         <figure style="display:<%= typeof playerStats == 'undefined' ? 'none' : 'block' %>">
-            <img id="profilePicture" src=<%=typeof profilePicture !='undefined' ? profilePicture : '/' %>
-            alt="Profile Picture" style="width: 128px;height:128px;">
+            <img id="profilePicture" src="<%= typeof profilePicture !== 'undefined' ? profilePicture : '/' %>"
+                alt="Profile Picture" style="width: 128px; height: 128px" />
             <figcaption id="nickname">
                 <%=typeof nickName !='undefined' ? nickName : '' %>
             </figcaption>
@@ -62,37 +60,37 @@
                     <h2>Points Scored</h2>
                 </div>
             </div>
-            <br>
+            <br />
             <h1 id="class_stats"><a href="#class_stats">Class Stats</a></h1>
             <div class="class_icons">
                 <img class="class_stat_icon" id="class_stat_Scout" src="/img/class_icons/Scout.png" alt="Scout Icon"
-                    draggable="false">
+                    draggable="false" />
                 <img class="class_stat_icon" id="class_stat_Soldier" src="/img/class_icons/Soldier.png"
-                    alt="Soldier Icon" draggable="false">
+                    alt="Soldier Icon" draggable="false" />
                 <img class="class_stat_icon" id="class_stat_Pyro" src="/img/class_icons/Pyro.png" alt="Pyro Icon"
-                    draggable="false">
+                    draggable="false" />
                 <img class="class_stat_icon" id="class_stat_Demoman" src="/img/class_icons/Demoman.png"
-                    alt="Demoman Icon" draggable="false">
+                    alt="Demoman Icon" draggable="false" />
                 <img class="class_stat_icon" id="class_stat_Heavy" src="/img/class_icons/Heavy.png" alt="Heavy Icon"
-                    draggable="false">
+                    draggable="false" />
                 <img class="class_stat_icon" id="class_stat_Engineer" src="/img/class_icons/Engineer.png"
-                    alt="Engineer Icon" draggable="false">
+                    alt="Engineer Icon" draggable="false" />
                 <img class="class_stat_icon" id="class_stat_Medic" src="/img/class_icons/Medic.png" alt="Medic Icon"
-                    draggable="false">
+                    draggable="false" />
                 <img class="class_stat_icon" id="class_stat_Sniper" src="/img/class_icons/Sniper.png" alt="Sniper Icon"
-                    draggable="false">
+                    draggable="false" />
                 <img class="class_stat_icon" id="class_stat_Spy" src="/img/class_icons/Spy.png" alt="Spy Icon"
-                    draggable="false">
+                    draggable="false" />
             </div>
-            <canvas id="classMaxChart" width="600" height="600" style="display:inline-block"></canvas>
-            <canvas id="classAccumChart" width="600" height="600" style="display:inline-block"></canvas>
-            <br>
+            <canvas id="classMaxChart" width="600" height="600" style="display: inline-block"></canvas>
+            <canvas id="classAccumChart" width="600" height="600" style="display: inline-block"></canvas>
+            <br />
             <h1 id="map_stats"><a href="#map_stats">Map Stats</a></h1>
-            <br>
-            <canvas id="mapChart" width="800" height="1000" style="display:inline-block"></canvas>
-            <br>
+            <br />
+            <canvas id="mapChart" width="800" height="1000" style="display: inline-block"></canvas>
+            <br />
             <h1 id="mvm_stats"><a href="#mvm_stats">MvM Stats</a></h1>
-            <br>
+            <br />
             <div class="mvmNumericalStats">
                 <div class="mvmNumericalStat">
                     <h1 id="numericalStat_RobotsKills"></h1>
@@ -103,42 +101,47 @@
                     <h2>Total Money Collected</h2>
                 </div>
             </div>
-            <br>
-            <br>
+            <br />
+            <br />
             <div class="class_icons">
                 <img class="class_stat_icon" id="mvm_class_stat_Scout" src="/img/class_icons/Scout.png" alt="Scout Icon"
-                    draggable="false">
+                    draggable="false" />
                 <img class="class_stat_icon" id="mvm_class_stat_Soldier" src="/img/class_icons/Soldier.png"
-                    alt="Soldier Icon" draggable="false">
+                    alt="Soldier Icon" draggable="false" />
                 <img class="class_stat_icon" id="mvm_class_stat_Pyro" src="/img/class_icons/Pyro.png" alt="Pyro Icon"
-                    draggable="false">
+                    draggable="false" />
                 <img class="class_stat_icon" id="mvm_class_stat_Demoman" src="/img/class_icons/Demoman.png"
-                    alt="Demoman Icon" draggable="false">
+                    alt="Demoman Icon" draggable="false" />
                 <img class="class_stat_icon" id="mvm_class_stat_Heavy" src="/img/class_icons/Heavy.png" alt="Heavy Icon"
-                    draggable="false">
+                    draggable="false" />
                 <img class="class_stat_icon" id="mvm_class_stat_Engineer" src="/img/class_icons/Engineer.png"
-                    alt="Engineer Icon" draggable="false">
+                    alt="Engineer Icon" draggable="false" />
                 <img class="class_stat_icon" id="mvm_class_stat_Medic" src="/img/class_icons/Medic.png" alt="Medic Icon"
-                    draggable="false">
+                    draggable="false" />
                 <img class="class_stat_icon" id="mvm_class_stat_Sniper" src="/img/class_icons/Sniper.png"
-                    alt="Sniper Icon" draggable="false">
+                    alt="Sniper Icon" draggable="false" />
                 <img class="class_stat_icon" id="mvm_class_stat_Spy" src="/img/class_icons/Spy.png" alt="Spy Icon"
-                    draggable="false">
+                    draggable="false" />
             </div>
-            <canvas id="mvmClassMaxChart" width="600" height="600" style="display:inline-block"></canvas>
-            <canvas id="mvmClassAccumChart" width="600" height="600" style="display:inline-block"></canvas>
+            <canvas id="mvmClassMaxChart" width="600" height="600" style="display: inline-block"></canvas>
+            <canvas id="mvmClassAccumChart" width="600" height="600" style="display: inline-block"></canvas>
         </div>
     </div>
     <%- include("footer") %>
+        <span id="player-stats-data"
+            data-stats="<%= typeof playerStats != 'undefined' ? JSON.stringify(playerStats) : 0 %>"
+            style="display: none;"></span>
 </body>
 <script>
-    window.playerStats = <%- typeof playerStats != 'undefined' ? JSON.stringify(playerStats) : 0 %>;
+    window.playerStats = JSON.parse(document.getElementById('player-stats-data').getAttribute('data-stats'));
     window.MAPPREFIXES = ["arena_", "cp_", "ctf_", "koth_", "mvm_", "pass_", "pd_", "pl_", "plr_", "rd_", "sd_", "tc_", "tr_"];
     window.CLASSES = ["Scout", "Soldier", "Pyro", "Demoman", "Heavy", "Engineer", "Medic", "Sniper", "Spy"];
 </script>
+<% if (typeof playerStats != 'undefined') { %>
 <script src="/js/overview.js"></script>
 <script src="/js/classes.js"></script>
 <script src="/js/map.js"></script>
 <script src="/js/mvm.js"></script>
+<% } %>
 
 </html>

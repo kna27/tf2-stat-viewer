@@ -3,28 +3,31 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0" />
-    <meta name="description" content="View your personal TF2 stats">
+    <meta name="description" content="View your personal TF2 stats" />
     <title>Private Profile!</title>
-    <link rel="stylesheet" type="text/css" href="/style.css">
+    <link rel="stylesheet" type="text/css" href="/style.css" />
     <link rel="icon" type="image/png" href="/img/icon.png" />
 </head>
 
 <body>
     <div class="content">
         <h1 class="headerText">Private Profile</h1>
-        <h2 class="headerText">Due to Steam API limitations, profiles must be set to <u>public</u> and also have <u>Game Details set to pubilc</u>.</h2>
-        <img src="/img/publicProfile.png" class="imageLarge">
-        <br>
-        <a href="/home" class="headerText">Return home</a>
-        <br>
-        <br>
-        <form>
-            <input type="text" id="steamid" name="steamid" placeholder="Enter your Steam name or Steam64 ID">
-            <button type="submit" id="submit"
-                onclick="window.location = window.origin + '/profile/' + steamid.value; return false;">Submit</button>
-        </form>
+        <h2 class="headerText">
+            Due to Steam API limitations, profiles must be set to
+            <u>public</u> and also have <u>Game Details set to pubilc</u>.
+        </h2>
+        <p>In Steam, go to
+            <a href="https://steamcommunity.com/my" target="_blank" rel="noopener">your profile page</a>,
+            click <b>Edit Profile</b>, then click <b>Privacy Settings</b>.
+        </p>
+        <img src="/img/publicProfile.png" class="imageLarge" />
+        <br />
+        <a href="/" class="headerText">Return home</a>
+        <br />
+        <br />
+        <%- include("search_form") %>
     </div>
     <%- include("footer") %>
 </body>

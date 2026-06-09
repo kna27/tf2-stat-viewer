@@ -1,148 +1,184 @@
-let classMaxChart;
-let classAccumChart;
+{
+    let classMaxChart;
+    let classAccumChart;
 
-function initCharts() {
-    let classMaxChartCanvas = document.getElementById("classMaxChart").getContext("2d");
-    classMaxChart = new Chart(classMaxChartCanvas, {
-        type: "bar",
-        data: {
-            labels: [],
-            datasets: [{
-                data: [],
-                backgroundColor: [
-                    'rgb(88,133,162)',
+    function initCharts() {
+        let classMaxChartCanvas = document
+            .getElementById("classMaxChart")
+            .getContext("2d");
+        classMaxChart = new Chart(classMaxChartCanvas, {
+            type: "bar",
+            data: {
+                labels: [],
+                datasets: [
+                    {
+                        data: [],
+                        backgroundColor: ["rgb(88,133,162)"],
+                    },
                 ],
-            }],
-
-        },
-        options: {
-            indexAxis: 'y',
-            responsive: false,
-            plugins: {
-                legend: {
-                    display: false
-                },
-                title: {
-                    display: true,
-                    font: {
-                        size: 22
-                    },
-                    text: "Maximum Stats",
-                }
             },
-            scales: {
-                x: {
-                    type: 'logarithmic',
-                    ticks: {
-                        font: {
-                            size: 15
-                        }
-                    }
-                },
-                y: {
-                    ticks: {
-                        font: {
-                            size: 24
-                        }
-                    }
-                }
-            }
-        }
-    });
-
-    var classAccumChartCanvas = document.getElementById("classAccumChart").getContext("2d");
-    classAccumChart = new Chart(classAccumChartCanvas, {
-        type: "bar",
-        data: {
-            labels: [],
-            datasets: [{
-                data: [],
-                backgroundColor: [
-                    'rgb(88,133,162)',
-                ]
-            }],
-
-        },
-        options: {
-            indexAxis: 'y',
-            responsive: false,
-            plugins: {
-                legend: {
-                    display: false
-                },
-                title: {
-                    display: true,
-                    font: {
-                        size: 22
+            options: {
+                indexAxis: "y",
+                responsive: false,
+                plugins: {
+                    legend: {
+                        display: false,
                     },
-                    text: "Total Stats"
-                }
-            },
-            scales: {
-                x: {
-                    type: 'logarithmic',
-                    ticks: {
+                    title: {
+                        display: true,
                         font: {
-                            size: 15
-                        }
-                    }
+                            size: 22,
+                        },
+                        text: "Maximum Stats",
+                    },
                 },
-                y: {
-                    ticks: {
+                scales: {
+                    x: {
+                        type: "logarithmic",
+                        ticks: {
+                            font: {
+                                size: 15,
+                            },
+                        },
+                    },
+                    y: {
+                        ticks: {
+                            font: {
+                                size: 24,
+                            },
+                        },
+                    },
+                },
+            },
+        });
+
+        var classAccumChartCanvas = document
+            .getElementById("classAccumChart")
+            .getContext("2d");
+        classAccumChart = new Chart(classAccumChartCanvas, {
+            type: "bar",
+            data: {
+                labels: [],
+                datasets: [
+                    {
+                        data: [],
+                        backgroundColor: ["rgb(88,133,162)"],
+                    },
+                ],
+            },
+            options: {
+                indexAxis: "y",
+                responsive: false,
+                plugins: {
+                    legend: {
+                        display: false,
+                    },
+                    title: {
+                        display: true,
                         font: {
-                            size: 24
-                        }
-                    }
-                }
-            }
-        }
-    });
-}
-
-initCharts();
-
-window.CLASSES.forEach((element) => document.getElementById(`class_stat_${element}`).addEventListener("click", function () { showNewClassStats(element) }));
-classPlayTime = {}
-window.CLASSES.forEach((element) => classPlayTime[element] = parseFloat(window.playerStats[element + ".accum.iPlayTime"]));
-var showClass = "Scout";
-for (var key in classPlayTime) {
-    showClass = (classPlayTime[showClass] < parseFloat(classPlayTime[key])) ? key : showClass;
-}
-showNewClassStats(showClass);
-
-function showNewClassStats(className) {
-
-    window.CLASSES.forEach(function (item) {
-        document.getElementById(`class_stat_${item}`).src = item == className ? `/img/class_icons_blu/${item}.png` : `/img/class_icons/${item}.png`;
-    });
-
-    maxData = {}
-    maxVals = []
-    accumData = {}
-    accumVals = []
-
-    for (var key in window.playerStats) {
-        if (key.startsWith(`${className}.max.i`) && window.playerStats[key] != 0) {
-            maxData[key.substr(`${className}.max.i`.length).replace(/([A-Z]+)/g, " $1")] = window.playerStats[key];
-        }
-        if (key.startsWith(`${className}.accum.i`) && window.playerStats[key] != 0) {
-            accumData[key.substr(`${className}.accum.i`.length).replace(/([A-Z]+)/g, " $1")] = window.playerStats[key];
-        }
+                            size: 22,
+                        },
+                        text: "Total Stats",
+                    },
+                },
+                scales: {
+                    x: {
+                        type: "logarithmic",
+                        ticks: {
+                            font: {
+                                size: 15,
+                            },
+                        },
+                    },
+                    y: {
+                        ticks: {
+                            font: {
+                                size: 24,
+                            },
+                        },
+                    },
+                },
+            },
+        });
     }
 
-    Object.entries(maxData).forEach(([key, value]) => {
-        maxVals.push(value);
-    });
+    initCharts();
 
-    Object.entries(accumData).forEach(([key, value]) => {
-        accumVals.push(value);
-    });
+    window.CLASSES.forEach((element) =>
+        document
+            .getElementById(`class_stat_${element}`)
+            .addEventListener("click", function () {
+                showNewClassStats(element);
+            }),
+    );
 
-    classMaxChart.data.datasets[0]["data"] = maxVals;
-    classMaxChart.data.labels = Object.keys(maxData);
-    classAccumChart.data.datasets[0]["data"] = accumVals;
-    classAccumChart.data.labels = Object.keys(accumData);
+    const classPlayTime = {};
+    window.CLASSES.forEach(
+        (element) =>
+            (classPlayTime[element] = parseFloat(
+                window.playerStats[element + ".accum.iPlayTime"] || 0,
+            )),
+    );
 
-    classMaxChart.update()
-    classAccumChart.update()
+    let showClass = "Scout";
+    for (const key in classPlayTime) {
+        showClass =
+            classPlayTime[showClass] < parseFloat(classPlayTime[key])
+                ? key
+                : showClass;
+    }
+    showNewClassStats(showClass);
+
+    function showNewClassStats(className) {
+        window.CLASSES.forEach(function (item) {
+            document.getElementById(`class_stat_${item}`).src =
+                item == className
+                    ? `/img/class_icons_blu/${item}.png`
+                    : `/img/class_icons/${item}.png`;
+        });
+
+        const maxData = {};
+        const maxVals = [];
+        const accumData = {};
+        const accumVals = [];
+
+        for (const key in window.playerStats) {
+            if (
+                key.startsWith(`${className}.max.i`) &&
+                window.playerStats[key] != 0
+            ) {
+                maxData[
+                    key
+                        .substr(`${className}.max.i`.length)
+                        .replace(/([A-Z]+)/g, " $1")
+                ] = window.playerStats[key];
+            }
+            if (
+                key.startsWith(`${className}.accum.i`) &&
+                window.playerStats[key] != 0
+            ) {
+                accumData[
+                    key
+                        .substr(`${className}.accum.i`.length)
+                        .replace(/([A-Z]+)/g, " $1")
+                ] = window.playerStats[key];
+            }
+        }
+
+        Object.entries(maxData).forEach(([key, value]) => {
+            maxVals.push(value);
+        });
+
+        Object.entries(accumData).forEach(([key, value]) => {
+            accumVals.push(value);
+        });
+
+        classMaxChart.data.datasets[0]["data"] = maxVals;
+        classMaxChart.data.labels = Object.keys(maxData);
+        classAccumChart.data.datasets[0]["data"] = accumVals;
+        classAccumChart.data.labels = Object.keys(accumData);
+
+        classMaxChart.update();
+        classAccumChart.update();
+    }
 }

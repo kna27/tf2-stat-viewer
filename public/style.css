@@ -8,22 +8,25 @@
     src: url(fonts/tf2secondary.ttf);
 }
 
-html, body {
+html,
+body {
     height: 100%;
+    background-color: #181514;
 }
 
 body {
     text-align: center;
     background-image: url("img/background.jpg");
     background-size: 100%;
-    background-color: #cccccc;
+    background-color: #181514;
     color: white;
     display: flex;
     flex-direction: column;
     font-family: "TF2-Secondary";
 }
 
-h1, h1 a {
+h1,
+h1 a {
     font-size: 3.5em;
     font-family: "TF2-Heading";
     text-decoration: none;
@@ -32,7 +35,7 @@ h1, h1 a {
 }
 
 h1 a:after {
-    content: '';
+    content: "";
     position: absolute;
     width: 100%;
     transform: scaleX(0);
@@ -93,7 +96,8 @@ input:focus {
     width: 75%;
 }
 
-#classMaxChart, #classAccumChart {
+#classMaxChart,
+#classAccumChart {
     width: 45%;
 }
 
@@ -219,15 +223,19 @@ input:focus {
     input {
         width: 60%;
     }
+
     #statsDiv {
         width: 100%;
     }
+
     #msgText {
         display: block;
     }
+
     .headerText {
         background-color: #555;
     }
+
     .imageLarge {
         width: 100%;
     }

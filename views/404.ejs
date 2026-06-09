@@ -3,26 +3,24 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0" />
-    <meta name="description" content="View your personal TF2 stats">
+    <meta name="description" content="View your personal TF2 stats" />
     <title>Page Not Found!</title>
-    <link rel="stylesheet" type="text/css" href="/style.css">
+    <link rel="stylesheet" type="text/css" href="/style.css" />
     <link rel="icon" type="image/png" href="/img/icon.png" />
 </head>
 
 <body>
     <div class="content">
         <h1 class="headerText">Page Not Found!</h1>
-        <h2 class="headerText">The page you have navigated to does not exist or has moved.</h2>
-        <a href="/home" class="headerText">Return home</a>
-        <br>
-        <br>
-        <form>
-            <input type="text" id="steamid" name="steamid" placeholder="Enter your Steam name or Steam64 ID">
-            <button type="submit" id="submit"
-                onclick="window.location = window.origin + '/profile/' + steamid.value; return false;">Submit</button>
-        </form>
+        <h2 class="headerText">
+            The page you have navigated to does not exist or has moved.
+        </h2>
+        <a href="/" class="headerText">Return home</a>
+        <br />
+        <br />
+        <%- include("search_form") %>
     </div>
     <%- include("footer") %>
 </body>

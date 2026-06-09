@@ -1,0 +1,10 @@
+<form>
+    <input type="text" id="steamid" name="steamid" placeholder="Enter your Steam name or Steam64 ID" />
+    <button type="submit" id="submit" onclick="
+                let val = steamid.value.replace(/\/$/, '').split('/').pop();
+                window.location = window.origin + '/profile/' + val;
+                return false;
+            ">
+        Submit
+    </button>
+</form>

@@ -1,11 +1,49 @@
 // Dependencies
-const fetch = require('node-fetch');
-const fs = require("fs");
+const { createClient } = require("redis");
 
 // Constants
 const settings = { method: "Get" };
-const MAPPREFIXES = ["arena_", "cp_", "ctf_", "koth_", "mvm_", "pass_", "pd_", "pl_", "plr_", "rd_", "sd_", "tc_", "tr_"];
+const MAPPREFIXES = [
+    "arena_",
+    "cp_",
+    "ctf_",
+    "htf_",
+    "koth_",
+    "mvm_",
+    "pass_",
+    "pd_",
+    "pl_",
+    "plr_",
+    "rd_",
+    "sd_",
+    "tc_",
+    "tow_",
+    "tr_",
+    "vsh_",
+    "zi_"
+];
 
+//--- REDIS / PERSISTENCE LOGIC ---//
+let redisClient = null;
+if (process.env.REDIS_URL) {
+    redisClient = createClient({ url: process.env.REDIS_URL });
+    redisClient.on("error", (err) => console.error("Redis Client Error", err));
+    redisClient.connect().catch(console.error);
+}
+
+async function incrementViews() {
+    if (!redisClient) {
+        console.error("Redis client not initialized");
+        return;
+    }
+
+    try {
+        const views = await redisClient.incr("views");
+        console.log(`Total views: ${views}`);
+    } catch (err) {
+        console.error("Redis error during increment:", err);
+    }
+}
 
 //--- GETTING JSON STATS ---//
 
@@ -17,68 +55,71 @@ async function safeParseJSON(response, res) {
     } catch (err) {
         console.error("Error Parsing JSON:", err);
         console.error("Response body:", body);
-        res.render('private_profile');
+        if (!res.headersSent) {
+            res.render("private_profile");
+        }
+        return null;
     }
 }
 
-// Fetches player stats JSON from the Steam API 
-function fetchJson(id, req, resp, pfp, name) {
-    var url = `http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v2/?key=${process.env.API_KEY}&appid=440&steamid=${id}&count=1&format=json`;
+// Fetches player stats JSON from the Steam API
+async function fetchJson(id, req, resp, pfp, name) {
+    var url = `http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v2/?key=${process.env.STEAM_API_KEY}&appid=440&steamid=${id}&count=1&format=json`;
     try {
-        fetch(url, settings).catch((err) => {
-            resp.render('profile_not_found');
-            console.log("Error fetching JSON: " + err)
+        const res = await fetch(url, settings);
+
+        if (!res.ok) {
+            // A non-200 response often means the profile is private or has no TF2 stats
+            if (!resp.headersSent) {
+                return resp.render("private_profile");
+            }
             return;
-        })
-            .then(res => safeParseJSON(res, resp))
-            .then((json) => {
-                if (json != null) {
-                    let allStats = formatStats(jsonToDict(json, resp));
-                    renderStats(resp, allStats, pfp, name);
+        }
+
+        const json = await safeParseJSON(res, resp);
+        if (json) {
+            const statsDict = jsonToDict(json, resp);
+            if (!statsDict) {
+                if (!resp.headersSent) {
+                    return resp.render("private_profile");
                 }
-                else {
-                    resp.render('profile_not_found');
-                }
-            })
+                return;
+            }
+            let allStats = formatStats(statsDict);
+            renderStats(resp, allStats, pfp, name);
+        }
     } catch (err) {
-        console.log("Error fetching JSON: " + err);
+        console.error("Error fetching JSON:", err);
+        if (!resp.headersSent) {
+            resp.render("profile_not_found");
+        }
     }
 }
 
 // Converts JSON from fetchJson() into a javascript dictionary
 function jsonToDict(jsonStats, res) {
-    var stats = jsonStats.playerstats.stats;
-    var achivmentStats = jsonStats.playerstats.achivments;
-    let dictStats = {}
-    if (stats == null) {
-        res.render('profile_not_found');
-        return;
-    } else {
-        for (let i = 0; i < stats.length; i++) {
-            dictStats[stats[i]['name']] = stats[i]['value'];
-        }
-        return dictStats;
+    if (!jsonStats || !jsonStats.playerstats || !jsonStats.playerstats.stats) {
+        return null;
     }
 
+    var stats = jsonStats.playerstats.stats;
+    let dictStats = {};
+    for (let i = 0; i < stats.length; i++) {
+        dictStats[stats[i]["name"]] = stats[i]["value"];
+    }
+    return dictStats;
 }
 
-// Formats necessary stats from jsonToDict() and puts them into seperate ditionaries if needed 
 function formatStats(statsDict) {
-    let playtimeStats = {}
-    let mapPlaytimeStats = {}
-
     for (var key in statsDict) {
-        // Class, map, and MvM playtime stats
-        if (key.endsWith(".accum.iPlayTime") && !MAPPREFIXES.some(substring => key.includes(substring))) {
+        // Class playtime stats
+        if (
+            key.endsWith(".accum.iPlayTime") &&
+            !MAPPREFIXES.some((substring) => key.includes(substring)) &&
+            !key.endsWith(".mvm.accum.iPlayTime")
+        ) {
             // Convert to hours
             statsDict[key] = (statsDict[key] / 3600).toFixed(2);
-            if (!key.endsWith(".mvm.accum.iPlayTime")) {
-                // Class playtime stats
-                playtimeStats[key.replace(".accum.iPlayTime", "")] = statsDict[key];
-            } else if (MAPPREFIXES.some(substring => key.includes(substring))) {
-                // Map playtime stats
-                mapPlaytimeStats[key.replace(".accum.iPlayTime", "")] = statsDict[key];
-            }
         }
     }
 
@@ -87,40 +128,13 @@ function formatStats(statsDict) {
 
 // Render and send the stats to the ejs page
 function renderStats(res, stats, pfp, name) {
-    res.render('index', {
-        playerStats: stats,
-        profilePicture: pfp,
-        nickName: name
-    });
-}
-
-
-//--- FILES READING, WRITING, CREATION ---//
-
-function createFile(filename) {
-    if (!fs.existsSync(filename)) {
-        fs.closeSync(fs.openSync(filename, 'w'));
+    if (!res.headersSent) {
+        res.render("index", {
+            playerStats: stats,
+            profilePicture: pfp,
+            nickName: name,
+        });
     }
 }
 
-function readFile(filename) {
-    try {
-        const data = fs.readFileSync(filename, 'utf8')
-        return data;
-    } catch (err) {
-        console.error(err);
-        return 0;
-    }
-}
-
-function writeFile(filename, content) {
-    console.log(`Writing content ${content} to ${filename}`);
-    fs.writeFile(filename, content, err => {
-        if (err) {
-            console.error(err);
-            return;
-        }
-    });
-}
-
-module.exports = { fetchJson, createFile, readFile, writeFile };
+module.exports = { fetchJson, incrementViews };
